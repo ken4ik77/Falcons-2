@@ -21,3 +21,6 @@ export async function getArtists(page = 1, limit = LIMIT, name, sortName, genre)
   const response = await api.get('/artists', { params });
   return response.data;
 };
+
+// const res = await getArtists(1, 8, 'Unlike Pluto', 'asc', 'grunge');
+// console.log(res);

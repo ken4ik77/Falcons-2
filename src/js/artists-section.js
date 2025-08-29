@@ -1,4 +1,4 @@
-import { getArtists } from './artists-api.js';
+import { getArtists } from './soundwave-api.js';
 
 async function init() {
   try {
