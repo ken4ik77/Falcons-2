@@ -26,10 +26,12 @@
 }
 
 /* логотип */
-.footer__logo img {
-  height: 40px;
+.footer__logo {
+  /* height: 40px; */
   width: auto;
-  display: block;
+  display: flex;
+  /* align-items: center; */
+  align-items: flex-end;
 }
 
 /* навігація */
@@ -69,8 +71,11 @@
 }
 
 .footer__copy {
-  font-size: 13px;
-  color: #aaa;
+  font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
   margin: 0;
 }
 
@@ -171,4 +176,37 @@
     
   margin: 0 auto;
     
+}
+.span_logo {
+  font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #764191;
+}
+.art-list {
+  font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+}
+/* по умолчанию (мобилка) */
+.logo-footer--desktop {
+  display: none;
+}
+
+/* на планшете и ПК */
+@media (min-width: 768px) {
+  .logo-footer--mobile {
+    display: none;
+  }
+
+  .logo-footer--desktop {
+    display: block;
+  }
+
+  .span_logo {
+    display: none;
+  }
 }
