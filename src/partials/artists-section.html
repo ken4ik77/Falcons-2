@@ -1,1 +1,25 @@
+<section class="artists" id="artists">
+  <div class="container">
+    <h2 class="artists__title">Artists</h2>
+    <p class="artists__subtitle">Explore Your New Favorite Artists</p>
 
+    <div class="artists__loader" data-artists-loader hidden>
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="sr-only">Loading…</span>
+    </div>
+
+    <div class="artists__grid" data-artists-grid></div>
+
+    <button class="btn btn--primary artists__more" data-artists-load hidden>
+      <span data-btn-text>Load More</span>
+      <span class="spinner spinner--btn" data-btn-spinner hidden></span>
+    </button>
+
+    <div
+      class="toast-root"
+      aria-live="polite"
+      aria-atomic="true"
+      data-toast-root
+    ></div>
+  </div>
+</section>
