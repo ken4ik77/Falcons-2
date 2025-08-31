@@ -1,0 +1,187 @@
+
+.no-scroll {
+    overflow: hidden;
+}
+
+button[data-modal-feedback-open] {
+    margin: 20px auto;
+    display: block;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #9333ea, #a855f7);
+    --color-white: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.backdrop.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+.modal {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    background: #060307;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    padding: 64px 16px;
+}
+
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.modal-close svg {
+    --color-white: #fff;
+    transition: fill 0.2s, transform 0.2s;
+}
+
+.modal-close:hover svg {
+--color-affair: #764191;
+    transform: rotate(90deg);
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 31px;
+    --color-white: #fff;
+}
+
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.feedback-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    gap: 8px;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0);
+    --color-white: #fff;
+    font-size: 18px;
+}
+
+.feedback-form textarea {
+    resize: none;
+    min-height: 130px;
+
+}
+
+
+.rating {
+    display: flex;
+    gap: 6px;
+}
+
+.star {
+    width: 31px;
+    height: 29px;
+    --color-white: #fff;
+    cursor: pointer;
+    transition: fill 0.2s ease;
+}
+
+.star.active {
+--color-affair: #764191;
+}
+
+.submit-btn {
+    padding: 10px 24px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 1px 2px 0 rgba(6, 3, 7, 0.05), inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(6, 3, 7, 0.15), inset 0 2px 1px 0 rgba(255, 255, 255, 0.25), inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+    background: #764191;
+    --color-white: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.submit-btn:hover {
+    opacity: 0.85;
+}
+
+
+@media (min-width: 768px) {
+    .modal {
+        max-width: 704px;
+        padding: 64px 32px;
+    }
+
+    .modal-title {
+        font-size: 44px;
+        margin-bottom: 48px;
+    }
+
+
+    .feedback-form {
+        gap: 24px;
+    }
+
+
+    .star {
+        width: 32px;
+        height: 32px;
+    }
+
+    .submit-btn {
+        align-self: center;
+        width: 340px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .modal {
+        padding: 64px;
+    }
+
+    .modal-title {
+        font-size: 60px;
+    }
+.feedback-form textarea{
+    min-height: 180px;
+}
+
+    .submit-btn {
+        width: 108px;
+    }
+
+}

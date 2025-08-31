@@ -7,6 +7,9 @@ import { getReviewsByQuery, handleReviews } from './js/feedback.js';
 // import './js/menu'
 // import './js/modal'
 import './js/feedback'
+import './js/modal-feedback'
+import './js/artists-section.js'
+
 
 axios.defaults.baseURL = "https://sound-wave.b.goit.study/api";
 
