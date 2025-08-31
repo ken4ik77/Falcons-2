@@ -38,6 +38,7 @@
     inset 0 32px 24px 0 var(--opacity-white-5);
   background: var(--color-affair);
   text-align: center;
+  margin-right: 12px;
 }
 .hero-btn {
   font-family: var(--font-family);
@@ -48,4 +49,5 @@
 }
 .icon-hero {
   fill: var(--color-scheme-1-text);
+  justify-content: center;
 }
