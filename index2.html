@@ -1,1 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/Falcons-2/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanilla App Template</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Epilogue:wght@700&family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/Falcons-2/index2.js"></script>
+    <link rel="stylesheet" crossorigin href="/Falcons-2/assets/index2-SYK3ur6a.css">
+  </head>
+  <body>
+    <header>
+  <div class="header-container container">
+    <nav class="header-nav">
+      <a href="./index.html">
+        <svg width="106" height="30" class="header-logo">
+          <use href="../img/icons-header.svg#icon-logo"></use>
+        </svg>
+      </a>
+      <ul class="nav-list">
+        <li><a class="header-link" href="#Artists">Artists</a></li>
+        <li><a class="header-link" href="#About-us">About Us</a></li>
+        <li><a class="header-link" href="#Reviews">Reviews</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="burger-bth" data-menu-open>
+      <svg width="24" height="24">
+        <use href="../img/icons-header.svg#icon-menu"></use>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-menu" data-menu>
+    <div class="mobile-menu-container">
+      <a href="./index.html" class="mobile-menu-logo">
+        <svg width="106" height="30">
+          <use href="../img/icons-header.svg#icon-logo"></use>
+        </svg>
+      </a>
 
+      <button type="button" class="mobile-menu-close" data-menu-close>
+        <svg width="24" height="24">
+          <use href="../img/icons-header.svg#icon-x"></use>
+        </svg>
+      </button>
+
+      <nav class="mobile-menu-nav">
+        <ul>
+          <li><a href="#Artists" class="mobile-nav-style">Artists</a></li>
+          <li><a href="#About-us" class="mobile-nav-style">About Us</a></li>
+          <li><a href="#Reviews" class="mobile-nav-style">Reviews</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+<script src="../main.js"></script>
+
+
+    <main>
+      <!-- Loads the specified .html file -->
+      <section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-header">Discover Your Next Favorite Artist Today</h1>
+      <div class="hero-text-cont">
+        <p class="hero-text">
+          Dive into a world of music discoveries with ArtistsHub – your personal
+          guide to the boundless universe of sound. Explore, filter, and learn
+          about your favorite artists all in one place.
+        </p>
+        <div class="link">
+          <a href="" class="hero-btn">Explore Artists</a>
+        </div>
+      </div>
+    </div>
+    <picture>
+      <source
+        srcset="/img/webp/ 1x, /img/webp/ 2x"
+        media="(max-width: 765px)"
+      />
+      <source
+        srcset="/img/webp/ 1x, /img/webp/ 2x"
+        media="(min-width: 1336px)"
+      />
+      <source
+        srcset="/img/webp/ 1x, /img/webp/ 2x"
+        media="(min-width: 766px)"
+      />
+
+      <img
+        src="/img/webp/hero_mob.webp"
+        alt="Placeholder Image"
+        loading="lazy"
+      />
+    </picture>
+  </div>
+</section>
+
+      
+      
+      
+      
+    </main>
+
+    
+
+  </body>
+</html>
