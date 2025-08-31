@@ -19,18 +19,27 @@ export async function getArtists(page = 1, limit = LIMIT) {
 function createArtistCard(artist) {
   return `
     <div class="artist-card">
-      <img src="${artist.strArtistThumb || 'https://via.placeholder.com/150'}" 
-           alt="${artist.strArtist}" 
-           class="artist-photo"/>
+      <img class="artist-photo" src="${artist.strArtistThumb || 'https://via.placeholder.com/150'}" alt="${artist.strArtist}" />
+
+      <div class="artist-genres">
+        ${artist.genres
+          ?.map(genre => `<span>${genre}</span>`)
+          .join('') || ''}
+      </div>
+
       <h3 class="artist-name">${artist.strArtist}</h3>
-      <p class="artist-genres">${artist.genres?.join(', ') || 'Unknown genre'}</p>
       <p class="artist-description">
-      ${artist.strBiographyEN ? artist.strBiographyEN.slice(0, 100) + '...' : 'No description'}
+        ${artist.strBiographyEN ? artist.strBiographyEN.slice(0, 100) + '...' : 'No description'}
       </p>
-      <button class="learn-more" data-id="${artist._id}">Learn More</button>
+
+      <button class="learn-more" data-id="${artist._id}">
+        Learn More
+      </button>
     </div>
   `;
 }
+
+
 const grid = document.querySelector('[data-artists-grid]');
 const loadMoreBtn = document.querySelector('[data-artists-load]');
 const loader = document.querySelector('[data-artists-loader]');

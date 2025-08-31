@@ -1,0 +1,231 @@
+
+.artists .container {
+    background-color: var(--color-scheme-1-background);
+    padding: 64px 16px;
+    }
+
+.artists__title {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--color-scheme-1-text);
+
+}
+
+.artists__subtitle {
+    font-family: var(--second-family);
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+    color: var(--color-scheme-1-text);
+
+}
+
+.artists__loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-left-color: #7b61ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* --- Artists grid styles (Mobile) --- */
+.artists__grid {
+    display: grid;
+    gap: 24px;
+}
+
+/* --- Artist card styles --- */
+.artist-card {
+    background-color: var(--opacity-transparent);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    min-width: 280px;
+}
+
+.artist-photo {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.artist-name {
+    margin-bottom: 4px;
+    font-family: var(--second-family);
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 130%;
+    letter-spacing: -0.01em;
+    color: var(--color-scheme-1-text);
+}
+
+.artist-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+.artist-genres span {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--color-white);
+    background-color: var(--opacity-transparent);
+    border: 1px solid var(--opacity-white-20);
+    border-radius: 6px;
+    padding: 4px 10px;
+}
+
+.artist-description {
+    margin-bottom: 16px;
+    flex-grow: 1;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    color: var(--color-scheme-1-text);
+}
+
+/* Кнопка Learn More як посилання */
+.learn-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--color-white);
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 150%;
+    }
+
+.learn-more::after {
+    content: '▶';
+    /* замінити на іконку svg */
+    font-size: 14px;
+}
+
+.learn-more:hover,
+.learn-more:focus {
+    background-color: #6a4ff5;
+}
+
+/* --- Load More button styles --- */
+.artists__more {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 40px auto 0;
+    padding: 12px 24px;
+    background-color: #7b61ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.artists__more:hover,
+.artists__more:focus {
+    background-color: #6a4ff5;
+}
+
+.artists__more[hidden] {
+    display: none;
+}
+
+/* --- Responsive styles for Tablet (min-width: 768px) --- */
+@media only screen and (min-width: 768px) {
+    .artists {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    .artists__title {
+        font-size: 32px;
+        margin-bottom: 12px;
+    }
+
+    .artists__subtitle {
+        font-size: 16px;
+        margin-bottom: 60px;
+    }
+
+    .artists__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+
+    .artist-photo {
+        height: 280px;
+    }
+}
+
+/* --- Responsive styles for Desktop (min-width: 1440px) --- */
+@media only screen and (min-width: 1440px) {
+    .artists {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .artists__title {
+        font-size: 48px;
+    }
+
+    .artists__subtitle {
+        font-size: 18px;
+    }
+
+    .artists__grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+    }
+
+    .artist-name {
+        font-size: 36px;
+    }
+
+    .artist-description {
+        font-size: 20px;
+    }
+}
