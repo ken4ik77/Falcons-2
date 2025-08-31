@@ -13,7 +13,6 @@
     font-size: 16px;
     line-height: 150%;
     color: var(--color-scheme-1-text);
-
 }
 
 .artists__subtitle {
@@ -23,7 +22,8 @@
     line-height: 120%;
     letter-spacing: -0.01em;
     color: var(--color-scheme-1-text);
-
+    margin-top: 16px;
+    margin-bottom: 32px;
 }
 
 .artists__loader {
@@ -59,20 +59,17 @@
     border: 0;
 }
 
-/* --- Artists grid styles (Mobile) --- */
 .artists__grid {
     display: grid;
-    gap: 24px;
+    gap: 64px;
 }
 
-/* --- Artist card styles --- */
 .artist-card {
     background-color: var(--opacity-transparent);
     border-radius: 8px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    padding: 16px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     width: 100%;
     min-width: 280px;
@@ -81,11 +78,11 @@
 .artist-photo {
     width: 100%;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 16px;
 }
 
 .artist-name {
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     font-family: var(--second-family);
     font-weight: 700;
     font-size: 32px;
@@ -97,7 +94,7 @@
 .artist-genres {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 16px;
     margin-top: 24px;
     margin-bottom: 16px;
 }
@@ -105,7 +102,7 @@
 .artist-genres span {
     font-family: var(--font-family);
     font-weight: 600;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 150%;
     color: var(--color-white);
     background-color: var(--opacity-transparent);
@@ -115,7 +112,7 @@
 }
 
 .artist-description {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     flex-grow: 1;
     font-family: var(--font-family);
     font-weight: 400;
@@ -124,7 +121,6 @@
     color: var(--color-scheme-1-text);
 }
 
-/* Кнопка Learn More як посилання */
 .learn-more {
     display: inline-flex;
     align-items: center;
@@ -138,96 +134,86 @@
     font-size: 18px;
     line-height: 150%;
 }
-
-.learn-more::after {
-    content: '▶';
-    /* замінити на іконку svg */
-    font-size: 14px;
+.icon-artists-learn-more {
+    fill: var(--color-white);
 }
 
 .learn-more:hover,
 .learn-more:focus {
-    background-color: #6a4ff5;
+    opacity: 0.6;
 }
 
-/* --- Load More button styles --- */
-.artists__more {
-    display: block;
+.artists-more {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
     width: 100%;
-    max-width: 200px;
-    margin: 40px auto 0;
-    padding: 12px 24px;
-    background-color: #7b61ff;
-    color: #fff;
+    margin-top: 32px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 150%;
+    color: var(--color-white);
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.2s ease;
+
+    box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5), 
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), 
+    inset 0 0 0 1px var(--opacity-neutral-darkest-15), 
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25), 
+    inset 0 32px 24px 0 var(--opacity-white-5);
+    background: var(--color-affair);
 }
 
-.artists__more:hover,
-.artists__more:focus {
-    background-color: #6a4ff5;
+.artists-more:hover,
+.artists-more:focus {
+    opacity: 0.6;
 }
 
-.artists__more[hidden] {
+.artists-more[hidden] {
     display: none;
 }
 
-/* --- Responsive styles for Tablet (min-width: 768px) --- */
 @media only screen and (min-width: 768px) {
-    .artists {
-        padding-top: 80px;
-        padding-bottom: 80px;
+    .artists .container {
+        padding: 64px 32px;
     }
 
-    .artists__title {
-        font-size: 32px;
-        margin-bottom: 12px;
+    .artists__grid {
+        gap: 32px;
+    }
+
+    .artists-more {
+        width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+@media only screen and (min-width: 1440px) {
+    .artists .container {
+        padding: 112px 64px;
     }
 
     .artists__subtitle {
-        font-size: 16px;
-        margin-bottom: 60px;
+        font-size: 60px;
     }
 
     .artists__grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 32px;
     }
 
-    .artist-photo {
-        height: 280px;
-    }
-}
-
-/* --- Responsive styles for Desktop (min-width: 1440px) --- */
-@media only screen and (min-width: 1440px) {
-    .artists {
-        padding-top: 100px;
-        padding-bottom: 100px;
+    .artists-more {
+        width: 170px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    .artists__title {
-        font-size: 48px;
-    }
-
-    .artists__subtitle {
-        font-size: 18px;
-    }
-
-    .artists__grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 40px;
-    }
-
-    .artist-name {
-        font-size: 36px;
-    }
-
-    .artist-description {
-        font-size: 20px;
-    }
 }
