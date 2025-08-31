@@ -1,6 +1,23 @@
 <section class="about-us">
     
     <picture>
+        <!-- picture webp format -->
+            <source
+              srcset="../img/About-Us/about-us-desk.webp 1x,
+                      ../img/About-Us/about-us-desk-2x.webp 2x"
+              media="(min-width: 1200px)"
+            />
+            <source
+              srcset = "../img/About-Us/about-us-tab.webp 1x,
+                      ../img/About-Us/about-us-tab-2x.webp 2x"
+              media="(min-width: 768px)"
+            />
+            <source
+              srcset = "../img/About-Us/about-us-mob.webp 1x,
+                      ../img/About-Us/about-us-mob-2x.webp 2x"
+              media="(max-width: 767px)"
+            />
+        <!-- picture png format -->
             <source
               srcset="
               "
@@ -19,7 +36,7 @@
             <img
               class="ab-us-picture"
               src=""
-              alt=""
+              alt="Team"
               loading="lazy"
             />
           </picture>

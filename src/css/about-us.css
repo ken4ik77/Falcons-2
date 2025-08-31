@@ -45,8 +45,13 @@ color: var(--color-scheme-1-text);
   .ab-us-text{
     font-size: 20px;
   }
-  .ab-us-picture {
-
+  .content-ab-wrap{
+      margin-top: 24px;
+      gap: 24px;
+  }
+  .logo-ab-us{
+    height: 80px;
+    width: 80px;
   }
 }
 @media (min-width: 1200px) {
@@ -59,7 +64,9 @@ color: var(--color-scheme-1-text);
         font-size: 60px;
     }
     .content-ab-wrap{
+        max-width: 50%;
         margin-top: 0;
+        margin-left: 32px;
         justify-content: center;
     }
 }
