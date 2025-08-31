@@ -1,8 +1,8 @@
 <header>
   <div class="header-container container">
     <nav class="header-nav">
-      <a href="./index.html">
-        <svg width="106" height="30" class="header-logo">
+      <a href="./index.html" aria-label="Home">
+        <svg width="106" height="30" class="header-logo" aria-hidden="true">
           <use href="../img/icons-header.svg#icon-logo"></use>
         </svg>
       </a>
@@ -12,22 +12,36 @@
         <li><a class="header-link" href="#Reviews">Reviews</a></li>
       </ul>
     </nav>
-    <button type="button" class="burger-bth" data-menu-open>
-      <svg width="24" height="24">
+
+    <!-- кнопка відкриття меню -->
+    <button
+      type="button"
+      class="burger-bth"
+      data-menu-open
+      aria-label="Open menu"
+    >
+      <svg width="24" height="24" aria-hidden="true">
         <use href="../img/icons-header.svg#icon-menu"></use>
       </svg>
     </button>
   </div>
+
   <div class="mobile-menu" data-menu>
     <div class="mobile-menu-container">
-      <a href="./index.html" class="mobile-menu-logo">
-        <svg width="106" height="30">
+      <a href="./index.html" class="mobile-menu-logo" aria-label="Home">
+        <svg width="106" height="30" aria-hidden="true">
           <use href="../img/icons-header.svg#icon-logo"></use>
         </svg>
       </a>
 
-      <button type="button" class="mobile-menu-close" data-menu-close>
-        <svg width="24" height="24">
+      <!-- кнопка закриття меню -->
+      <button
+        type="button"
+        class="mobile-menu-close"
+        data-menu-close
+        aria-label="Close menu"
+      >
+        <svg width="24" height="24" aria-hidden="true">
           <use href="../img/icons-header.svg#icon-x"></use>
         </svg>
       </button>
@@ -42,4 +56,5 @@
     </div>
   </div>
 </header>
+
 <script src="../main.js"></script>
