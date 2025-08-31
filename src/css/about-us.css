@@ -5,11 +5,11 @@ margin: 0 auto;
 }
 
 .ab-us-picture {
- display: block;
- border-radius: 16px;
-  max-width: 100%; 
-  height: auto;    
+  border-radius: 16px;
+  object-fit: cover;    
   display: block;
+  width: 100%;     
+  height: auto;    
 }
 .content-ab-wrap {
  margin-top: 48px;
@@ -18,7 +18,9 @@ margin: 0 auto;
  gap: 20px;
 }
 .logo-ab-us {
-
+ width: 64px;
+ height: 64px;
+ fill: var(--color-scheme-2-accent);
 }
 .ab-us-title {
 font-family: var(--second-family);
