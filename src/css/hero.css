@@ -1,9 +1,16 @@
+.hero {
+  background: var(--color-scheme-3-background);
+  justify-items: center;
+  width: 100%;
+}
 .hero-cont {
   padding: 0 16px;
-  background: var(--color-scheme-3-background);
+  display: block;
+  justify-content: center;
 }
 .hero-content {
-  padding-top: 64px;
+  padding: 64px 0;
+  background-position: top;
 }
 .hero-header {
   max-width: 265px;
@@ -50,4 +57,62 @@
 .icon-hero {
   fill: var(--color-scheme-1-text);
   justify-content: center;
+}
+.backgr-hero {
+  width: 280px;
+  height: 385px;
+  background-image: url('../img/Hero/hero-mob.png');
+}
+.link-hero:focus,
+.link-hero:hover {
+  box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px var(--opacity-neutral-darkest-15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 32px 24px 0 var(--opacity-white-5);
+  background: var(--color-affair);
+  opacity: 0.6;
+}
+
+@media screen and (min-width: 768px) {
+  .hero-cont {
+    max-width: 1024px;
+  }
+  .hero-header {
+    max-width: 624px;
+    margin-bottom: 24px;
+  }
+  .hero-content {
+    padding: 0;
+    margin-bottom: 24px;
+  }
+  .hero-text {
+    max-width: 624px;
+  }
+  .link-hero {
+    width: 246px;
+  }
+  .backgr-hero {
+    width: 704px;
+    height: 632px;
+    background-image: url('../img/Hero/hero-tab.png');
+  }
+}
+@media screen and (min-width: 1440px) {
+  .hero-cont {
+    padding: 0px 64px;
+    max-width: 1440px;
+    display: flex;
+  }
+  .hero-header {
+    max-width: 1440px;
+  }
+  .hero-content {
+    width: 671px;
+  }
+  .backgr-hero {
+    width: 641px;
+    height: 900px;
+    background-image: url('../img/Hero/hero-desk.png');
+  }
 }
