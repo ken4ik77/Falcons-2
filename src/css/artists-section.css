@@ -2,6 +2,8 @@
     display: none !important;
 }
 
+
+
 .artists .container {
     background-color: var(--color-scheme-1-background);
     padding: 64px 16px;
@@ -13,6 +15,7 @@
     font-size: 16px;
     line-height: 150%;
     color: var(--color-scheme-1-text);
+   
 }
 
 .artists__subtitle {
@@ -63,6 +66,7 @@
     display: grid;
     gap: 64px;
 }
+
 
 .artist-card {
     background-color: var(--opacity-transparent);
@@ -124,7 +128,7 @@
 .learn-more {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 16px;
     padding: 0;
     background: none;
     border: none;
@@ -133,6 +137,7 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 150%;
+    
 }
 .icon-artists-learn-more {
     fill: var(--color-white);
@@ -193,6 +198,7 @@
         width: 340px;
         margin-left: auto;
         margin-right: auto;
+        margin-top: 64px;
     }
 
 }
@@ -204,6 +210,7 @@
 
     .artists__subtitle {
         font-size: 60px;
+        width: 863px;
     }
 
     .artists__grid {
@@ -215,5 +222,6 @@
         margin-left: auto;
         margin-right: auto;
     }
+   
 
 }
