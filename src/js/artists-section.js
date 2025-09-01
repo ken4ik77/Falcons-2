@@ -84,23 +84,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-grid.addEventListener('click', async e => {
-  if (e.target.matches('.learn-more')) {
-    const artistId = e.target.dataset.id;
-    try {
-      const response = await api.get(`/artists/${artistId}`);
-      const artist = response.data;
+// grid.addEventListener('click', async e => {
+//   if (e.target.matches('.learn-more')) {
+//     const artistId = e.target.dataset.id;
+//     try {
+//       const response = await api.get(`/artists/${artistId}`);
+//       const artist = response.data;
 
-      const modalContent = document.querySelector('[data-modal-content]');
-      modalContent.innerHTML = `
-        <img src="${artist.photo}" alt="${artist.name}"/>
-        <h2>${artist.name}</h2>
-        <p>${artist.description}</p>
-      `;
+//       const modalContent = document.querySelector('[data-modal-content]');
+//       modalContent.innerHTML = `
+//         <img src="${artist.photo}" alt="${artist.name}"/>
+//         <h2>${artist.name}</h2>
+//         <p>${artist.description}</p>
+//       `;
 
-      document.querySelector('[data-modal]').classList.add('is-open');
-    } catch (err) {
-      console.error('Не вдалося завантажити артиста:', err);
-    }
-  }
-});
+//       document.querySelector('.modal').classList.remove('hidden');
+//     } catch (err) {
+//       console.error('Не вдалося завантажити артиста:', err);
+//     }
+//   }
+// });
