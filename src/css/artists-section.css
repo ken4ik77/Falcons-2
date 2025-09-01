@@ -2,6 +2,8 @@
     display: none !important;
 }
 
+
+
 .artists .container {
     background-color: var(--color-scheme-1-background);
     padding: 64px 16px;
@@ -13,6 +15,7 @@
     font-size: 16px;
     line-height: 150%;
     color: var(--color-scheme-1-text);
+
 }
 
 .artists__subtitle {
@@ -63,6 +66,7 @@
     display: grid;
     gap: 64px;
 }
+
 
 .artist-card {
     background-color: var(--opacity-transparent);
@@ -124,7 +128,7 @@
 .learn-more {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 16px;
     padding: 0;
     background: none;
     border: none;
@@ -133,7 +137,9 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 150%;
+
 }
+
 .icon-artists-learn-more {
     fill: var(--color-white);
 }
@@ -163,11 +169,11 @@
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.2s ease;
 
-    box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5), 
-    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), 
-    inset 0 0 0 1px var(--opacity-neutral-darkest-15), 
-    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25), 
-    inset 0 32px 24px 0 var(--opacity-white-5);
+    box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5),
+        inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2),
+        inset 0 0 0 1px var(--opacity-neutral-darkest-15),
+        inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+        inset 0 32px 24px 0 var(--opacity-white-5);
     background: var(--color-affair);
 }
 
@@ -193,6 +199,7 @@
         width: 340px;
         margin-left: auto;
         margin-right: auto;
+        margin-top: 64px;
     }
 
 }
@@ -204,6 +211,7 @@
 
     .artists__subtitle {
         font-size: 60px;
+        width: 863px;
     }
 
     .artists__grid {
@@ -215,5 +223,6 @@
         margin-left: auto;
         margin-right: auto;
     }
+
 
 }
