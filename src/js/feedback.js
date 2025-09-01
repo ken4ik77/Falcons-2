@@ -24,20 +24,15 @@ export async function handleReviews(reviews) {
 
     const markup = reviews.map(({ name, rating, descr }, index) =>
         `<div class="swiper-slide">
-            <div class="rating" id="rating">
-                <div class="stars-container stars-${index}">
-                </div>
+            <div class="feedback-card">
+                ${setRating(rating)}
+                <p class="review">"${descr}"</p>
+                <p class="review-author-name">${name}</p>
             </div>
-            <p class="review">"${descr}"</p>
-            <p class="review-author-name">${name}</p>
         </div>`
     ).join('');
 
     wrapper.insertAdjacentHTML('beforeend', markup);
-
-    reviews.forEach((review, index) => {
-        setRating(review.rating, index)
-    });
 
     const swiper = new Swiper('.swiper', {
         modules: [Navigation, Pagination],
@@ -60,30 +55,30 @@ export async function handleReviews(reviews) {
     document.querySelector('.swiper-button-prev').addEventListener('click', () => swiper.slidePrev());
 }
 
-function setRating(rating, index) {
-    const starsContainer = document.querySelector(`div.stars-${index}`);
-    const fullStars = Math.round(rating);
-    const emptyStars = 5 - fullStars;
-
-    starsContainer.innerHTML = '';
-
-    for (let i = 0; i < fullStars; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star-container');
-        star.innerHTML = `
-            <svg class="star my-star-filled">
-                <use href="../img/icons.svg#icon-star"></use>
-            </svg>`;
-        starsContainer.appendChild(star);
+function setRating(rating) {
+    const SPRITE_MOUNT_ID = 'star-rating-sprite';
+    if (!document.getElementById(SPRITE_MOUNT_ID)) {
+        const holder = document.createElement('div');
+        holder.id = SPRITE_MOUNT_ID;
+        holder.style.position = 'absolute';
+        holder.style.width = '0';
+        holder.style.height = '0';
+        holder.style.overflow = 'hidden';
+        holder.innerHTML = starSprite;
+        document.body.prepend(holder);
     }
+    const rounded = Math.round(rating);
+    const stars = Array.from({ length: 5 }, (_, i) => {
+        const filled = i < rounded;
+        return `
+            <svg class="star ${
+                filled ? 'filled' : 'empty'
+            }" aria-hidden="true" width="20" height="20">
+            <use href="#star-filled"></use>
+        </svg>`;
+    }).join('');
 
-    for (let i = 0; i < emptyStars; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star-container');
-        star.innerHTML = `
-            <svg class="star my-star-empty">
-                <use href="../img/icons.svg#icon-star"></use>
-            </svg>`;
-        starsContainer.appendChild(star);
-    }
+    return `<div class="rating star-svg value-${rounded}" aria-label="Rating ${rounded} out of 5">
+        <div class="star-container">${stars}</div>
+        </div>`;
 }
