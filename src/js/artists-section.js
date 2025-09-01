@@ -40,7 +40,7 @@ export async function renderArtists(data, page, limit) {
   const loadMoreBtn = document.querySelector('[data-artists-load]');
   const loader = document.querySelector('[data-artists-loader]');
 
-  loader.hidden = false;
+  loader.hidden = false; 
   loadMoreBtn.hidden = true;
 
   grid.insertAdjacentHTML(
@@ -48,11 +48,12 @@ export async function renderArtists(data, page, limit) {
     data.artists.map(createArtistCard).join('')
   );
 
+    loader.hidden = true;
+  
   if (page * limit < data.totalArtists) {
     loadMoreBtn.hidden = false;
   }
-  
-  
+
   loadMoreBtn?.addEventListener('click', async () => {
     page++;
     const artists = await getArtists(page);
