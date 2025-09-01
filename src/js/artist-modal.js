@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!artistId) return;
 
     try {
-      const response = await api.get(`/artists/${artistId}/albums`);
+      const response = await axios.get(`/artists/${artistId}/albums`);
       const artist = response.data;
 
       modalContent.innerHTML = renderArtistModal(artist);

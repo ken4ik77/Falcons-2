@@ -1,16 +1,9 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://sound-wave.b.goit.study/api';
-const LIMIT = 8;
 
-const api = axios.create({
-  baseURL: BASE_URL,
-  timeout: 10000,
-  headers: { 'Content-Type': 'application/json' },
-});
 
-export async function getArtists(page = 1, limit = LIMIT) {
-  const response = await api.get('/artists', {
+export async function getArtists(page = 1, limit = 8) {
+  const response = await axios.get('/artists', {
     params: { page, limit },
   });
   return response.data;
@@ -42,65 +35,27 @@ function createArtistCard(artist) {
   `;
 }
 
+export async function renderArtists(data, page, limit) {
+  const grid = document.querySelector('[data-artists-grid]');
+  const loadMoreBtn = document.querySelector('[data-artists-load]');
+  const loader = document.querySelector('[data-artists-loader]');
 
-const grid = document.querySelector('[data-artists-grid]');
-const loadMoreBtn = document.querySelector('[data-artists-load]');
-const loader = document.querySelector('[data-artists-loader]');
-
-let currentPage = 1;
-
-async function renderArtists(page = 1) {
   loader.hidden = false;
   loadMoreBtn.hidden = true;
+
+  grid.insertAdjacentHTML(
+    'beforeend',
+    data.artists.map(createArtistCard).join('')
+  );
+
+  if (page * limit < data.totalArtists) {
+    loadMoreBtn.hidden = false;
+  }
   
-  try {
-    const data = await getArtists(page);
-    console.log('API response:', data);
-
-    grid.insertAdjacentHTML(
-      'beforeend',
-      data.artists.map(createArtistCard).join('')
-    );
-
-    if (page * LIMIT < data.totalArtists) {
-      loadMoreBtn.hidden = false;
-    }
-  } catch (err) {
-    console.error('Помилка завантаження артистів:', err);
-  } finally {
-    loader.hidden = true;
-  }
+  
+  loadMoreBtn?.addEventListener('click', async () => {
+    page++;
+    const artists = await getArtists(page);
+    await renderArtists(artists, page, limit);
+  });
 }
-
-loadMoreBtn?.addEventListener('click', async () => {
-  currentPage++;
-  await renderArtists(currentPage);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  renderArtists(currentPage);
-});
-
-
-
-
-grid.addEventListener('click', async e => {
-  if (e.target.matches('.learn-more')) {
-    const artistId = e.target.dataset.id;
-    try {
-      const response = await api.get(`/artists/${artistId}`);
-      const artist = response.data;
-
-      const modalContent = document.querySelector('[data-modal-content]');
-      modalContent.innerHTML = `
-        <img src="${artist.photo}" alt="${artist.name}"/>
-        <h2>${artist.name}</h2>
-        <p>${artist.description}</p>
-      `;
-
-      document.querySelector('[data-modal]').classList.add('is-open');
-    } catch (err) {
-      console.error('Не вдалося завантажити артиста:', err);
-    }
-  }
-});
