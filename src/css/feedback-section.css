@@ -1,6 +1,85 @@
+.feedback-section {
+    background-color: var(--color-scheme-1-background);
+}
+
+.swiper {
+    width: 100%;
+}
+
+.swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
+.review {
+    font-family: "Epilogue", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 32px;
+}
+
+.review-author-name {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 16px !important;
+}
+
+.rating {
+    align-self: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.stars-container {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.star-container {
+    height: 19px;
+    width: 20px;
+}
+
+.star svg,
 .star {
     height: 19px;
-    width: 21px
+    width: 20px;
+    display: block;
+}
+
+svg.star {
+    height: 19px !important;
+    width: 20px !important;
 }
 
 .my-star-filled {
@@ -11,26 +90,31 @@
     fill: #FFFFFF;
 }
 
-.stars-container {
-    display: flex;
-    gap: 4px;
+.swiper {
+    height: 253px;
 }
 
-.swiper {
-    width: 288px;
-    height: 253px;
+.swiper .swiper-pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 9px;
+    background-color: #383539;
+    opacity: 1;
+}
+
+.swiper .swiper-pagination .swiper-pagination-bullet-active {
+    background-color: #fff;
 }
 
 @media only screen and (min-width: 768px) {
     .swiper {
-        width: 704px;
+        /* width: 704px; */
         height: 297px;
     }
 }
 
 @media only screen and (min-width: 1200px) {
     .swiper {
-        width: 1312px;
+        /* width: 1312px; */
         height: 397px;
     }
 }

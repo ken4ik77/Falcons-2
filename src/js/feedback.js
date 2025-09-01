@@ -23,7 +23,6 @@ export async function handleReviews(reviews) {
 
     const markup = reviews.map(({ name, rating, descr }, index) =>
         `<div class="swiper-slide">
-            <p class="review-rating">Rating: ${rating}</p>
             <div class="rating" id="rating">
                 <div class="stars-container stars-${index}">
                 </div>
@@ -40,9 +39,16 @@ export async function handleReviews(reviews) {
     });
 
     const swiper = new Swiper('.swiper', {
+        modules: [Navigation, Pagination],
         direction: 'horizontal',
         loop: true,
-        pagination: { el: '.swiper-pagination' },
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets',
+            clickable: true,
+            dynamicBullets: true,
+            dynamicMainBullets: 1, 
+        },
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
@@ -72,7 +78,7 @@ function setRating(rating, index) {
 
     for (let i = 0; i < emptyStars; i++) {
         const star = document.createElement('div');
-        star.classList.add('star');
+        star.classList.add('star-container');
         star.innerHTML = `
             <svg class="star my-star-empty">
                 <use href="../img/icons.svg#icon-star"></use>
