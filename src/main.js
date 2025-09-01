@@ -12,15 +12,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 import { getReviewsByQuery, handleReviews } from './js/feedback.js';
 import { getArtists, renderArtists } from './js/artists-section.js';
-
-// const BASE_URL = 'https://sound-wave.b.goit.study/api';
-// const LIMIT = 8;
-
-// const api = axios.create({
-//   baseURL: BASE_URL,
-//   timeout: 10000,
-//   headers: { 'Content-Type': 'application/json' },
-// });
+import { listenArtistsSection } from './js/artist-modal.js';
 
 axios.defaults.baseURL = "https://sound-wave.b.goit.study/api";
 
@@ -30,6 +22,7 @@ async function fetchData() {
     const artists = await getArtists(currentPage);
     console.log(`Artists: ${JSON.stringify(artists)}`);
     await renderArtists(artists, currentPage, limit);
+    listenArtistsSection();
 
     const reviews = await getReviewsByQuery();
     console.log(`Review: ${JSON.stringify(reviews)}`);

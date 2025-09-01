@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-
+import { listenArtistsSection } from './artist-modal.js';
 
 export async function getArtists(page = 1, limit = 8) {
   const response = await axios.get('/artists', {
@@ -57,5 +57,6 @@ export async function renderArtists(data, page, limit) {
     page++;
     const artists = await getArtists(page);
     await renderArtists(artists, page, limit);
+    listenArtistsSection();
   });
 }

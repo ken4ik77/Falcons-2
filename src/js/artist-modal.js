@@ -1,42 +1,35 @@
 import '../css/artist-modal.css';
 import axios from 'axios';
 
-const BASE_URL = 'https://sound-wave.b.goit.study/api';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const grid = document.querySelector('[data-artists-grid]');
-   console.log(grid);
-  const modal = document.querySelector('.modal');
-  const modalContent = document.querySelector('.artist-info');
+export async function listenArtistsSection() {
+  const learnBtns = document.querySelectorAll('.learn-more');
+  learnBtns.forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const artistId = btn.dataset.id;
+      try {
+        const response = await axios.get(`/artists/${artistId}/albums`);
+        const artist = response.data;
+        console.log(`Artist: ${JSON.stringify(artist)}`);
+
+        const modal = document.querySelector('.artist-modal');
+        const modalContent = document.querySelector('.artist-info');
+        modalContent.innerHTML = renderArtistModal(artist);
+        console.log(`modal.classList: ${modal.classList}`);
+        modal.classList.remove('hidden-artist-modal');
+        console.log(`modal.classList: ${modal.classList}`);
+      } catch (error) {
+        console.error('Error loading artist info:', error);
+      }
+    });
+  });
+
   const closeBtn = document.querySelector('.close');
-
-  if (!grid || !modal || !modalContent || !closeBtn) {
-    console.error('DOM elements not found!');
-    return;
-  }
-
-  grid.addEventListener('click', async (e) => {
-    const btn = e.target.closest('.learn-more');
-    if (!btn) return;
-
-    const artistId = btn.dataset.id;
-    if (!artistId) return;
-
-    try {
-      const response = await axios.get(`/artists/${artistId}/albums`);
-      const artist = response.data;
-
-      modalContent.innerHTML = renderArtistModal(artist);
-      modal.classList.remove('hidden');
-    } catch (error) {
-      console.error('Error loading artist info:', error);
-    }
-  });
-
   closeBtn.addEventListener('click', () => {
-    modal.classList.add('hidden');
+    const modal = document.querySelector('.artist-modal');
+    modal.classList.add('hidden-artist-modal');
   });
-});
+}
 
 function renderArtistModal(artist) {
   return `
