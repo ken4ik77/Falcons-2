@@ -45,25 +45,30 @@ import{a as o,S as m,N as p,P as v}from"./assets/vendor-Dat0JyPq.js";(function()
       </div>
     </div>
   `}async function d(e=1,r=8){return(await o.get("/artists",{params:{page:e,limit:r}})).data}function f(e){var r;return`
-    <div class="artist-card">
-      <img class="artist-photo" src="${e.strArtistThumb||"https://via.placeholder.com/150"}" alt="${e.strArtist}" />
+    <li class="artist-card">
+      <img 
+        class="artist-photo" 
+        src="${e.strArtistThumb||"https://via.placeholder.com/150"}" 
+        alt="${e.strArtist}" 
+      />
 
-      <div class="artist-genres">
-        ${((r=e.genres)==null?void 0:r.map(i=>`<span>${i}</span>`).join(""))||""}
-      </div>
+      <ul class="artist-genres">
+        ${((r=e.genres)==null?void 0:r.map(i=>`<li>${i}</li>`).join(""))||""}
+      </ul>
 
       <h3 class="artist-name">${e.strArtist}</h3>
+
       <p class="artist-description">
         ${e.strBiographyEN?e.strBiographyEN.slice(0,100)+"...":"No description"}
       </p>
 
       <button class="learn-more" data-id="${e._id}">
         Learn More
-        <svg class="icon-artists-learn-more" width="24" height="24">
-                <use href="/img/icons.svg#icon-learn-more"></use>
-              </svg>
+        <svg class="icon-artists-learn-more" width="8" height="24">
+          <use href="/img/icons.svg#icon-learn-more"></use>
+        </svg>
       </button>
-    </div>
+    </li>
   `}async function u(e,r,i){const a=document.querySelector("[data-artists-grid]"),t=document.querySelector("[data-artists-load]"),s=document.querySelector("[data-artists-loader]");s.hidden=!1,t.hidden=!0,a.insertAdjacentHTML("beforeend",e.artists.map(f).join("")),s.hidden=!0,r*i<e.totalArtists&&(t.hidden=!1),t==null||t.addEventListener("click",async()=>{r++;const n=await d(r);await u(n,r,i),l()})}(()=>{const e={openModalBtn:document.querySelector("[data-menu-open]"),closeModalBtn:document.querySelector("[data-menu-close]"),modal:document.querySelector("[data-menu]")};e.openModalBtn.addEventListener("click",r),e.closeModalBtn.addEventListener("click",r);function r(){e.modal.classList.toggle("is-open")}})();async function y(){return(await o.get("/feedbacks",{params:{limit:10,page:1}})).data}async function h(e){const r=document.querySelector("div.swiper-wrapper"),i=e.map(({name:t,rating:s,descr:n},c)=>`<div class="swiper-slide">
             <div class="rating" id="rating">
                 <div class="stars-container stars-${c}">
