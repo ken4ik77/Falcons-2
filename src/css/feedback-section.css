@@ -72,10 +72,14 @@ svg.star {
 
 .my-star-filled {
     fill: #764191;
+    height: 19px !important;
+    width: 20px !important;
 }
 
 .my-star-empty {
     fill: #FFFFFF;
+    height: 19px !important;
+    width: 20px !important;
 }
 
 .swiper {

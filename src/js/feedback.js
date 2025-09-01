@@ -9,7 +9,8 @@ import 'izitoast/dist/css/iziToast.min.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-// import 'raty-js/src/raty.css';
+import 'css-star-rating/css/star-rating.min.css';
+import starSprite from '../img/star-rating.icons.svg?raw';
 
 export async function getReviewsByQuery() {
     const response = await axios.get('/feedbacks', {
