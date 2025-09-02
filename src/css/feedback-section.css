@@ -35,6 +35,7 @@
     max-width: 518px;
     margin: 0 auto;
     text-align: center;
+    padding-bottom: 16px;
 }
 
 .swiper-wrapper {
@@ -72,8 +73,8 @@
 
 .icon-arrow {
     fill: #fff;
-    width: 14px;
-    height: 14px;
+    width: 14px !important;
+    height: 14px !important;
     display: block;
     pointer-events: none;
 }
