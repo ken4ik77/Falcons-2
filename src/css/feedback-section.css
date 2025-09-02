@@ -1,10 +1,33 @@
 .feedback-section {
     background-color: var(--color-scheme-1-background);
+    color: var(--color-white);
     padding: 64px 16px;
 }
 
 .swiper {
     width: 100%;
+}
+
+.feedback-swiper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    max-width: 1312px;
+}
+
+.feedback-card {
+    max-width: 518px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.swiper-wrapper {
+    display: flex !important;
+    height: auto;
+    margin-bottom: 0;
 }
 
 .swiper-slide {
@@ -137,6 +160,14 @@
 }
 
 @media only screen and (min-width: 768px) {
+    .feedback-section {
+        padding: 64px 32px;
+    }
+
+    .feedback-card {
+        max-width: 518px;
+    }
+
     .swiper {
         /* width: 704px; */
         height: 297px;
@@ -159,6 +190,29 @@
 
     .review {
         font-size: 26px;
+        max-width: 518px;
+    }
+
+    .review-author-name {
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: auto;
+        z-index: 10;
+    }
+    
+    .swiper-button-prev {
+        left: 0;
+    }
+    
+    .swiper-button-next {
+        right: 0;
     }
 }
 

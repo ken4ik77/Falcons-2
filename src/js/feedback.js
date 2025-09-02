@@ -11,7 +11,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'css-star-rating/css/star-rating.min.css';
 import starSprite from '../img/star-rating.icons.svg?raw';
-import mainSprite from '../img/icons.svg?raw';
 
 export async function getReviewsByQuery() {
     const response = await axios.get('/feedbacks', {
@@ -51,18 +50,6 @@ export async function handleReviews(reviews) {
             prevEl: '.swiper-button-prev',
         }
     });
-
-    // const ICON_SPRITE_MOUNT_ID = 'main-icon-sprite';
-    // if (!document.getElementById(ICON_SPRITE_MOUNT_ID)) {
-    //     const holder = document.createElement('div');
-    //     holder.id = ICON_SPRITE_MOUNT_ID;
-    //     holder.style.position = 'absolute';
-    //     holder.style.width = '0';
-    //     holder.style.height = '0';
-    //     holder.style.overflow = 'hidden';
-    //     holder.innerHTML = mainSprite;
-    //     document.body.prepend(holder);
-    // }
 
     document.querySelector('.swiper-button-next').addEventListener('click', () => swiper.slideNext());
     document.querySelector('.swiper-button-prev').addEventListener('click', () => swiper.slidePrev());
