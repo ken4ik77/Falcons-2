@@ -1,17 +1,17 @@
-import{a as o,S as m,N as p,P as v}from"./assets/vendor-Dat0JyPq.js";(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))a(t);new MutationObserver(t=>{for(const s of t)if(s.type==="childList")for(const n of s.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&a(n)}).observe(document,{childList:!0,subtree:!0});function i(t){const s={};return t.integrity&&(s.integrity=t.integrity),t.referrerPolicy&&(s.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?s.credentials="include":t.crossOrigin==="anonymous"?s.credentials="omit":s.credentials="same-origin",s}function a(t){if(t.ep)return;t.ep=!0;const s=i(t);fetch(t.href,s)}})();async function l(){document.querySelectorAll(".learn-more").forEach(i=>{i.addEventListener("click",async()=>{const a=i.dataset.id;try{const s=(await o.get(`/artists/${a}/albums`)).data;console.log(`Artist: ${JSON.stringify(s)}`);const n=document.querySelector(".artist-modal"),c=document.querySelector(".artist-info");c.innerHTML=g(s),console.log(`modal.classList: ${n.classList}`),n.classList.remove("hidden-artist-modal"),console.log(`modal.classList: ${n.classList}`)}catch(t){console.error("Error loading artist info:",t)}})}),document.querySelector(".close").addEventListener("click",()=>{document.querySelector(".artist-modal").classList.add("hidden-artist-modal")})}function g(e){var r,i;return`
-    <h2 class="artist-name">${e.strArtist}</h2>
+import{a as o,S as m,N as g,P as f}from"./assets/vendor-DeWL0fjv.js";(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))n(e);new MutationObserver(e=>{for(const a of e)if(a.type==="childList")for(const r of a.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&n(r)}).observe(document,{childList:!0,subtree:!0});function i(e){const a={};return e.integrity&&(a.integrity=e.integrity),e.referrerPolicy&&(a.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?a.credentials="include":e.crossOrigin==="anonymous"?a.credentials="omit":a.credentials="same-origin",a}function n(e){if(e.ep)return;e.ep=!0;const a=i(e);fetch(e.href,a)}})();async function d(){document.querySelectorAll(".learn-more").forEach(i=>{i.addEventListener("click",async()=>{const n=i.dataset.id;try{const a=(await o.get(`/artists/${n}/albums`)).data;console.log(`Artist: ${JSON.stringify(a)}`);const r=document.querySelector(".artist-modal"),l=document.querySelector(".artist-info");l.innerHTML=v(a),console.log(`modal.classList: ${r.classList}`),r.classList.remove("hidden-artist-modal"),console.log(`modal.classList: ${r.classList}`)}catch(e){console.error("Error loading artist info:",e)}})}),document.querySelector(".close").addEventListener("click",()=>{document.querySelector(".artist-modal").classList.add("hidden-artist-modal")})}function v(t){var s,i;return`
+    <h2 class="artist-name">${t.strArtist}</h2>
     <div class="det_info">
-      <img src="${e.strArtistThumb}" class="artist-img" alt="${e.strArtist}">
+      <img src="${t.strArtistThumb}" class="artist-img" alt="${t.strArtist}">
       <ul class="artist-details">
-        <li>Years active: ${e.intFormedYear||"?"} – ${e.intDiedYear||"present"}</li>
-        <li>Sex: ${e.strGender||"?"}</li>
-        <li>Members: ${e.intMembers||"?"}</li>
-        <li>Country: ${e.strCountry||"?"}</li>
-        <li>Biography: ${e.strBiographyEN||"No info"}</li>
+        <li>Years active: ${t.intFormedYear||"?"} – ${t.intDiedYear||"present"}</li>
+        <li>Sex: ${t.strGender||"?"}</li>
+        <li>Members: ${t.intMembers||"?"}</li>
+        <li>Country: ${t.strCountry||"?"}</li>
+        <li>Biography: ${t.strBiographyEN||"No info"}</li>
         <li>
           Genres:
           <ul class="artist-genres">
-            ${((r=e.genres)==null?void 0:r.map(a=>`<li>${a}</li>`).join(""))||"No genres"}
+            ${((s=t.genres)==null?void 0:s.map(n=>`<li>${n}</li>`).join(""))||"No genres"}
           </ul>
         </li>
       </ul>
@@ -19,9 +19,9 @@ import{a as o,S as m,N as p,P as v}from"./assets/vendor-Dat0JyPq.js";(function()
     <div class="album-full">
       <h3 class="alb">Albums</h3>
       <div class="albums-grid">
-        ${(i=e.albumsList)==null?void 0:i.map(a=>{var t;return`
+        ${(i=t.albumsList)==null?void 0:i.map(n=>{var e;return`
           <div class="album-card">
-            <h4>${a.strAlbum}</h4>
+            <h4>${n.strAlbum}</h4>
             <div class="track-table">
               <div class="track-header">
                 <div>Track</div>
@@ -29,12 +29,12 @@ import{a as o,S as m,N as p,P as v}from"./assets/vendor-Dat0JyPq.js";(function()
                 <div>Link</div>
               </div>
               <div class="track-body">
-                ${(t=a.tracks)==null?void 0:t.map(s=>`
+                ${(e=n.tracks)==null?void 0:e.map(a=>`
                   <div class="track-row">
-                    <div class="track-name">${s.strTrack}</div>
-                    <div class="track-time">${s.strTime||""}</div>
+                    <div class="track-name">${a.strTrack}</div>
+                    <div class="track-time">${a.strTime||""}</div>
                     <div class="track-link">
-                      ${s.movie?`<a href="${s.movie}" target="_blank">🎬</a>`:""}
+                      ${a.movie?`<a href="${a.movie}" target="_blank">🎬</a>`:""}
                     </div>
                   </div>
                 `).join("")}
@@ -44,43 +44,66 @@ import{a as o,S as m,N as p,P as v}from"./assets/vendor-Dat0JyPq.js";(function()
         `}).join("")}
       </div>
     </div>
-  `}async function d(e=1,r=8){return(await o.get("/artists",{params:{page:e,limit:r}})).data}function f(e){var r;return`
+  `}async function u(t=1,s=8){return(await o.get("/artists",{params:{page:t,limit:s}})).data}function h(t){var s;return`
     <li class="artist-card">
       <img 
         class="artist-photo" 
-        src="${e.strArtistThumb||"https://via.placeholder.com/150"}" 
-        alt="${e.strArtist}" 
+        src="${t.strArtistThumb||"https://via.placeholder.com/150"}" 
+        alt="${t.strArtist}" 
       />
 
       <ul class="artist-genres">
-        ${((r=e.genres)==null?void 0:r.map(i=>`<li>${i}</li>`).join(""))||""}
+        ${((s=t.genres)==null?void 0:s.map(i=>`<li>${i}</li>`).join(""))||""}
       </ul>
 
-      <h3 class="artist-name">${e.strArtist}</h3>
+      <h3 class="artist-name">${t.strArtist}</h3>
 
       <p class="artist-description">
-        ${e.strBiographyEN?e.strBiographyEN.slice(0,100)+"...":"No description"}
+        ${t.strBiographyEN?t.strBiographyEN.slice(0,100)+"...":"No description"}
       </p>
 
-      <button class="learn-more" data-id="${e._id}">
+      <button class="learn-more" data-id="${t._id}">
         Learn More
         <svg class="icon-artists-learn-more" width="8" height="24">
           <use href="../img/icons.svg#icon-learn-more"></use>
         </svg>
       </button>
     </li>
-  `}async function u(e,r,i){const a=document.querySelector("[data-artists-grid]"),t=document.querySelector("[data-artists-load]"),s=document.querySelector("[data-artists-loader]");s.hidden=!1,t.hidden=!0,a.insertAdjacentHTML("beforeend",e.artists.map(f).join("")),s.hidden=!0,r*i<e.totalArtists&&(t.hidden=!1),t==null||t.addEventListener("click",async()=>{r++;const n=await d(r);await u(n,r,i),l()})}(()=>{const e={openModalBtn:document.querySelector("[data-menu-open]"),closeModalBtn:document.querySelector("[data-menu-close]"),modal:document.querySelector("[data-menu]")};e.openModalBtn.addEventListener("click",r),e.closeModalBtn.addEventListener("click",r);function r(){e.modal.classList.toggle("is-open")}})();async function y(){return(await o.get("/feedbacks",{params:{limit:10,page:1}})).data}async function h(e){const r=document.querySelector("div.swiper-wrapper"),i=e.map(({name:t,rating:s,descr:n},c)=>`<div class="swiper-slide">
-            <div class="rating" id="rating">
-                <div class="stars-container stars-${c}">
-                </div>
+  `}async function p(t,s,i){const n=document.querySelector("[data-artists-grid]"),e=document.querySelector("[data-artists-load]"),a=document.querySelector("[data-artists-loader]");a.hidden=!1,e.hidden=!0,n.insertAdjacentHTML("beforeend",t.artists.map(h).join("")),a.hidden=!0,s*i<t.totalArtists&&(e.hidden=!1),e==null||e.addEventListener("click",async()=>{s++;const r=await u(s);await p(r,s,i),d()})}(()=>{const t={openModalBtn:document.querySelector("[data-menu-open]"),closeModalBtn:document.querySelector("[data-menu-close]"),modal:document.querySelector("[data-menu]")};t.openModalBtn.addEventListener("click",s),t.closeModalBtn.addEventListener("click",s);function s(){t.modal.classList.toggle("is-open")}})();const y=`<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <symbol id="star-empty" viewBox="0 0 34 32">
+            <title>star-empty</title>
+            <path class="path-star-empty"
+                  d="M33.412 12.395l-11.842-1.021-4.628-10.904-4.628 10.92-11.842 1.005 8.993 7.791-2.701 11.579 10.179-6.144 10.179 6.144-2.685-11.579 8.976-7.791zM16.941 22.541l-6.193 3.739 1.647-7.049-5.468-4.744 7.214-0.626 2.8-6.638 2.816 6.654 7.214 0.626-5.468 4.744 1.647 7.049-6.209-3.755z"/>
+        </symbol>
+        <symbol id="star-half" viewBox="0 0 34 32">
+            <title>star-half</title>
+            <path class="path-star-half"
+                  d="M 33.412,12.395 21.57,11.374 16.942,0.47 12.314,11.39 0.472,12.395 9.465,20.186 6.764,31.765 16.943,25.621 27.122,31.765 24.437,20.186 33.413,12.395 Z M 16.941,22.541 c 0,0 -0.297971,-14.6455833 0,-15.318 l 2.816,6.654 7.214,0.626 -5.468,4.744 1.647,7.049 z"/>
+            </symbol>
+        <symbol id="star-filled" viewBox="0 0 34 32">
+            <title>star-filled</title>
+            <path class="path-star-filled"
+                  d="M16.941 25.621l10.179 6.144-2.701-11.579 8.993-7.791-11.842-1.005-4.628-10.92-4.628 10.92-11.842 1.005 8.993 7.791-2.701 11.579z"/>
+        </symbol>
+    </defs>
+</svg>`;async function b(){return(await o.get("/feedbacks",{params:{limit:10,page:1}})).data}async function w(t){const s=document.querySelector("div.swiper-wrapper"),i=t.map(({name:e,rating:a,descr:r},l)=>`<div class="swiper-slide">
+            <div class="feedback-card">
+                ${S(a)}
+                <p class="review">"${r}"</p>
+                <p class="review-author-name">${e}</p>
             </div>
-            <p class="review">"${n}"</p>
-            <p class="review-author-name">${t}</p>
-        </div>`).join("");r.insertAdjacentHTML("beforeend",i),e.forEach((t,s)=>{$(t.rating,s)});const a=new m(".swiper",{modules:[p,v],direction:"horizontal",loop:!0,pagination:{el:".swiper-pagination",type:"bullets",clickable:!0,dynamicBullets:!0,dynamicMainBullets:1},navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"}});document.querySelector(".swiper-button-next").addEventListener("click",()=>a.slideNext()),document.querySelector(".swiper-button-prev").addEventListener("click",()=>a.slidePrev())}function $(e,r){const i=document.querySelector(`div.stars-${r}`),a=Math.round(e),t=5-a;i.innerHTML="";for(let s=0;s<a;s++){const n=document.createElement("div");n.classList.add("star-container"),n.innerHTML=`
-            <svg class="star my-star-filled">
-                <use href="../img/icons.svg#icon-star"></use>
-            </svg>`,i.appendChild(n)}for(let s=0;s<t;s++){const n=document.createElement("div");n.classList.add("star-container"),n.innerHTML=`
-            <svg class="star my-star-empty">
-                <use href="../img/icons.svg#icon-star"></use>
-            </svg>`,i.appendChild(n)}}o.defaults.baseURL="https://sound-wave.b.goit.study/api";async function w(){const i=await d(1);console.log(`Artists: ${JSON.stringify(i)}`),await u(i,1,8),l();const a=await y();console.log(`Review: ${JSON.stringify(a)}`),await h(a.data)}w();
+        </div>`).join("");s.insertAdjacentHTML("beforeend",i),$(t.length);const n=new m(".swiper",{modules:[g,f],direction:"horizontal",loop:!0,pagination:{el:".swiper-pagination",type:"custom",renderCustom:function(e,a,r){return L()}},navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},on:{slideChange:function(){c(this.realIndex+1,t.length)}}});document.querySelector(".swiper-button-next").addEventListener("click",()=>n.slideNext()),document.querySelector(".swiper-button-prev").addEventListener("click",()=>n.slidePrev()),c(1,t.length)}function $(t){const s=document.querySelector(".swiper-pagination");s.innerHTML=`
+        <span class="swiper-pagination-bullet custom-bullet" data-position="first" aria-label="First slide"></span>
+        <span class="swiper-pagination-bullet custom-bullet" data-position="middle" aria-label="Middle slides"></span>
+        <span class="swiper-pagination-bullet custom-bullet" data-position="last" aria-label="Last slide"></span>`}function L(t,s){return`
+        <span class="swiper-pagination-bullet custom-bullet" data-position="first"></span>
+        <span class="swiper-pagination-bullet custom-bullet" data-position="middle"></span>
+        <span class="swiper-pagination-bullet custom-bullet" data-position="last"></span>`}function c(t,s){const i=document.querySelectorAll(".custom-bullet");i.forEach(n=>n.classList.remove("swiper-pagination-bullet-active")),t===1?i[0].classList.add("swiper-pagination-bullet-active"):t===s?i[2].classList.add("swiper-pagination-bullet-active"):i[1].classList.add("swiper-pagination-bullet-active")}function S(t){const s="star-rating-sprite";if(!document.getElementById(s)){const e=document.createElement("div");e.id=s,e.style.position="absolute",e.style.width="0",e.style.height="0",e.style.overflow="hidden",e.innerHTML=y,document.body.prepend(e)}const i=Math.round(t),n=Array.from({length:5},(e,a)=>`
+            <svg class="star ${a<i?"filled":"empty"}" aria-hidden="true" width="20" height="20">
+                <use href="#star-filled"></use>
+            </svg>`).join("");return`<div class="rating star-svg value-${i}" aria-label="Rating ${i} out of 5">
+        <div class="star-container">${n}</div>
+        </div>`}o.defaults.baseURL="https://sound-wave.b.goit.study/api";async function A(){const i=await u(1);console.log(`Artists: ${JSON.stringify(i)}`),await p(i,1,8),d();const n=await b();console.log(`Review: ${JSON.stringify(n)}`),await w(n.data)}A();
 //# sourceMappingURL=index.js.map
