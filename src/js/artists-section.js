@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { listenArtistsSection } from './artist-modal.js';
+import icons from '../img/icons.svg'
 
 export async function getArtists(page = 1, limit = 8) {
   const response = await axios.get('/artists', {
@@ -35,7 +36,7 @@ function createArtistCard(artist) {
       <button class="learn-more" data-id="${artist._id}">
         Learn More
         <svg class="icon-artists-learn-more" width="8" height="24">
-          <use xlink:href="./img/icons.svg#icon-artist-svg-1"></use>
+          <use xlink:href="${icons}#icon-artist-svg-1"></use>
         </svg>
       </button>
     </li>
