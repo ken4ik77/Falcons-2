@@ -65,7 +65,7 @@ import{a as o,S as m,N as g,P as f}from"./assets/vendor-DeWL0fjv.js";(function()
       <button class="learn-more" data-id="${t._id}">
         Learn More
         <svg class="icon-artists-learn-more" width="8" height="24">
-          <use href="../img/icons.svg#icon-learn-more"></use>
+          <use href="/img/icons.svg#icon-learn-more"></use>
         </svg>
       </button>
     </li>
