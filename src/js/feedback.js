@@ -9,7 +9,8 @@ import 'izitoast/dist/css/iziToast.min.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-// import 'raty-js/src/raty.css';
+import 'css-star-rating/css/star-rating.min.css';
+import starSprite from '../img/star-rating.icons.svg?raw';
 
 export async function getReviewsByQuery() {
     const response = await axios.get('/feedbacks', {
@@ -23,66 +24,93 @@ export async function handleReviews(reviews) {
 
     const markup = reviews.map(({ name, rating, descr }, index) =>
         `<div class="swiper-slide">
-            <div class="rating" id="rating">
-                <div class="stars-container stars-${index}">
-                </div>
+            <div class="feedback-card">
+                ${setRating(rating)}
+                <p class="review">"${descr}"</p>
+                <p class="review-author-name">${name}</p>
             </div>
-            <p class="review">"${descr}"</p>
-            <p class="review-author-name">${name}</p>
         </div>`
     ).join('');
 
     wrapper.insertAdjacentHTML('beforeend', markup);
 
-    reviews.forEach((review, index) => {
-        setRating(review.rating, index)
-    });
-
+    createCustomPagination(reviews.length);
     const swiper = new Swiper('.swiper', {
         modules: [Navigation, Pagination],
         direction: 'horizontal',
         loop: true,
         pagination: {
             el: '.swiper-pagination',
-            type: 'bullets',
-            clickable: true,
-            dynamicBullets: true,
-            dynamicMainBullets: 1, 
+            type: 'custom',
+            renderCustom: function (swiper, current, total) {
+                return renderCustomPagination(current, total);
+            }
         },
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
+        },
+        on: {
+            slideChange: function () {
+                updateCustomPagination(this.realIndex + 1, reviews.length);
+            }
         }
     });
 
     document.querySelector('.swiper-button-next').addEventListener('click', () => swiper.slideNext());
     document.querySelector('.swiper-button-prev').addEventListener('click', () => swiper.slidePrev());
+    updateCustomPagination(1, reviews.length);
 }
 
-function setRating(rating, index) {
-    const starsContainer = document.querySelector(`div.stars-${index}`);
-    const fullStars = Math.round(rating);
-    const emptyStars = 5 - fullStars;
+function createCustomPagination(totalSlides) {
+    const paginationContainer = document.querySelector('.swiper-pagination');
+    paginationContainer.innerHTML = `
+        <span class="swiper-pagination-bullet custom-bullet" data-position="first" aria-label="First slide"></span>
+        <span class="swiper-pagination-bullet custom-bullet" data-position="middle" aria-label="Middle slides"></span>
+        <span class="swiper-pagination-bullet custom-bullet" data-position="last" aria-label="Last slide"></span>`;
+}
 
-    starsContainer.innerHTML = '';
+function renderCustomPagination(current, total) {
+    return `
+        <span class="swiper-pagination-bullet custom-bullet" data-position="first"></span>
+        <span class="swiper-pagination-bullet custom-bullet" data-position="middle"></span>
+        <span class="swiper-pagination-bullet custom-bullet" data-position="last"></span>`;
+}
 
-    for (let i = 0; i < fullStars; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star-container');
-        star.innerHTML = `
-            <svg class="star my-star-filled">
-                <use href="../img/icons.svg#icon-star"></use>
-            </svg>`;
-        starsContainer.appendChild(star);
+function updateCustomPagination(currentSlide, totalSlides) {
+    const bullets = document.querySelectorAll('.custom-bullet');    
+    bullets.forEach(bullet => bullet.classList.remove('swiper-pagination-bullet-active'));
+    if (currentSlide === 1) {
+        bullets[0].classList.add('swiper-pagination-bullet-active');
+    } else if (currentSlide === totalSlides) {
+        bullets[2].classList.add('swiper-pagination-bullet-active');
+    } else {
+        bullets[1].classList.add('swiper-pagination-bullet-active');
     }
+}
 
-    for (let i = 0; i < emptyStars; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star-container');
-        star.innerHTML = `
-            <svg class="star my-star-empty">
-                <use href="../img/icons.svg#icon-star"></use>
-            </svg>`;
-        starsContainer.appendChild(star);
+function setRating(rating) {
+    const SPRITE_MOUNT_ID = 'star-rating-sprite';
+    if (!document.getElementById(SPRITE_MOUNT_ID)) {
+        const div = document.createElement('div');
+        div.id = SPRITE_MOUNT_ID;
+        div.style.position = 'absolute';
+        div.style.width = '0';
+        div.style.height = '0';
+        div.style.overflow = 'hidden';
+        div.innerHTML = starSprite;
+        document.body.prepend(div);
     }
+    const rounded = Math.round(rating);
+    const stars = Array.from({ length: 5 }, (_, i) => {
+        const filled = i < rounded;
+        return `
+            <svg class="star ${filled ? 'filled' : 'empty'}" aria-hidden="true" width="20" height="20">
+                <use href="#star-filled"></use>
+            </svg>`;
+    }).join('');
+
+    return `<div class="rating star-svg value-${rounded}" aria-label="Rating ${rounded} out of 5">
+        <div class="star-container">${stars}</div>
+        </div>`;
 }
