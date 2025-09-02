@@ -92,6 +92,35 @@
     background-color: #fff;
 }
 
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    display: none;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    padding: 12px;
+    background-color: transparent;
+    border: 1px solid var(--opacity-white-50);
+    border-radius: 8px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-scheme-1-text);
+}
+
+.icon-arrow {
+    fill: #fff;
+    width: 14px;
+    height: 14px;
+    display: block;
+    pointer-events: none;
+}
+
 @media only screen and (max-width: 768px) {
     .hidden-on-mobile {
         position: absolute;
