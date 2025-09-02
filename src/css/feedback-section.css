@@ -45,7 +45,7 @@
 
 .arrow-btns-contaimer {
     position: relative;
-    height: 1px;
+    height: 0px;
 }
 
 .swiper-button-next,
