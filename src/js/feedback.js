@@ -34,25 +34,59 @@ export async function handleReviews(reviews) {
 
     wrapper.insertAdjacentHTML('beforeend', markup);
 
+    createCustomPagination(reviews.length);
     const swiper = new Swiper('.swiper', {
         modules: [Navigation, Pagination],
         direction: 'horizontal',
         loop: true,
         pagination: {
             el: '.swiper-pagination',
-            type: 'bullets',
-            clickable: true,
-            dynamicBullets: true,
-            dynamicMainBullets: 1, 
+            type: 'custom',
+            renderCustom: function (swiper, current, total) {
+                return renderCustomPagination(current, total);
+            }
         },
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
+        },
+        on: {
+            slideChange: function () {
+                updateCustomPagination(this.realIndex + 1, reviews.length);
+            }
         }
     });
 
     document.querySelector('.swiper-button-next').addEventListener('click', () => swiper.slideNext());
     document.querySelector('.swiper-button-prev').addEventListener('click', () => swiper.slidePrev());
+    updateCustomPagination(1, reviews.length);
+}
+
+function createCustomPagination(totalSlides) {
+    const paginationContainer = document.querySelector('.swiper-pagination');
+    paginationContainer.innerHTML = `
+        <span class="swiper-pagination-bullet custom-bullet" data-position="first" aria-label="First slide"></span>
+        <span class="swiper-pagination-bullet custom-bullet" data-position="middle" aria-label="Middle slides"></span>
+        <span class="swiper-pagination-bullet custom-bullet" data-position="last" aria-label="Last slide"></span>`;
+}
+
+function renderCustomPagination(current, total) {
+    return `
+        <span class="swiper-pagination-bullet custom-bullet" data-position="first"></span>
+        <span class="swiper-pagination-bullet custom-bullet" data-position="middle"></span>
+        <span class="swiper-pagination-bullet custom-bullet" data-position="last"></span>`;
+}
+
+function updateCustomPagination(currentSlide, totalSlides) {
+    const bullets = document.querySelectorAll('.custom-bullet');    
+    bullets.forEach(bullet => bullet.classList.remove('swiper-pagination-bullet-active'));
+    if (currentSlide === 1) {
+        bullets[0].classList.add('swiper-pagination-bullet-active');
+    } else if (currentSlide === totalSlides) {
+        bullets[2].classList.add('swiper-pagination-bullet-active');
+    } else {
+        bullets[1].classList.add('swiper-pagination-bullet-active');
+    }
 }
 
 function setRating(rating) {
@@ -71,11 +105,9 @@ function setRating(rating) {
     const stars = Array.from({ length: 5 }, (_, i) => {
         const filled = i < rounded;
         return `
-            <svg class="star ${
-                filled ? 'filled' : 'empty'
-            }" aria-hidden="true" width="20" height="20">
-            <use href="#star-filled"></use>
-        </svg>`;
+            <svg class="star ${filled ? 'filled' : 'empty'}" aria-hidden="true" width="20" height="20">
+                <use href="#star-filled"></use>
+            </svg>`;
     }).join('');
 
     return `<div class="rating star-svg value-${rounded}" aria-label="Rating ${rounded} out of 5">

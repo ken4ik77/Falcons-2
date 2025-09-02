@@ -121,6 +121,33 @@
     pointer-events: none;
 }
 
+.swiper .swiper-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    bottom: auto;
+    margin-top: 32px;
+}
+
+.swiper .swiper-pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background-color: #383539;
+    opacity: 1;
+    border-radius: 50%;
+    margin: 0;
+    cursor: default;
+}
+
+.swiper .swiper-pagination .swiper-pagination-bullet.custom-bullet {
+    transition: background-color 0.3s ease;
+}
+
+.swiper .swiper-pagination .swiper-pagination-bullet-active {
+    background-color: #fff;
+}
+
 @media only screen and (max-width: 768px) {
     .hidden-on-mobile {
         position: absolute;
@@ -238,15 +265,4 @@
     fill: var(--color-scheme-1-text);
     stroke: none;
     opacity: 1;
-}
-
-.swiper .swiper-pagination .swiper-pagination-bullet {
-    width: 8px;
-    height: 9px;
-    background-color: #383539;
-    opacity: 1;
-}
-
-.swiper .swiper-pagination .swiper-pagination-bullet-active {
-    background-color: #fff;
 }
