@@ -35,7 +35,7 @@ function createArtistCard(artist) {
       <button class="learn-more" data-id="${artist._id}">
         Learn More
         <svg class="icon-artists-learn-more" width="8" height="24">
-          <use xlink:href="/img/icons.svg#icon-artist-svg-1"></use>
+          <use xlink:href="./img/icons.svg#icon-artist-svg-1"></use>
         </svg>
       </button>
     </li>
