@@ -1,16 +1,20 @@
-import{a as o,S as m,N as g,P as f}from"./assets/vendor-DeWL0fjv.js";(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))n(e);new MutationObserver(e=>{for(const a of e)if(a.type==="childList")for(const r of a.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&n(r)}).observe(document,{childList:!0,subtree:!0});function i(e){const a={};return e.integrity&&(a.integrity=e.integrity),e.referrerPolicy&&(a.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?a.credentials="include":e.crossOrigin==="anonymous"?a.credentials="omit":a.credentials="same-origin",a}function n(e){if(e.ep)return;e.ep=!0;const a=i(e);fetch(e.href,a)}})();async function d(){document.querySelectorAll(".learn-more").forEach(i=>{i.addEventListener("click",async()=>{const n=i.dataset.id;try{const a=(await o.get(`/artists/${n}/albums`)).data;console.log(`Artist: ${JSON.stringify(a)}`);const r=document.querySelector(".artist-modal"),l=document.querySelector(".artist-info");l.innerHTML=v(a),console.log(`modal.classList: ${r.classList}`),r.classList.remove("hidden-artist-modal"),console.log(`modal.classList: ${r.classList}`)}catch(e){console.error("Error loading artist info:",e)}})}),document.querySelector(".close").addEventListener("click",()=>{document.querySelector(".artist-modal").classList.add("hidden-artist-modal")})}function v(t){var s,i;return`
+import{a as o,S as m,N as g,P as v}from"./assets/vendor-DeWL0fjv.js";(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))n(e);new MutationObserver(e=>{for(const a of e)if(a.type==="childList")for(const r of a.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&n(r)}).observe(document,{childList:!0,subtree:!0});function i(e){const a={};return e.integrity&&(a.integrity=e.integrity),e.referrerPolicy&&(a.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?a.credentials="include":e.crossOrigin==="anonymous"?a.credentials="omit":a.credentials="same-origin",a}function n(e){if(e.ep)return;e.ep=!0;const a=i(e);fetch(e.href,a)}})();async function d(){document.querySelectorAll(".learn-more").forEach(i=>{i.addEventListener("click",async()=>{const n=i.dataset.id;try{const a=(await o.get(`/artists/${n}/albums`)).data,r=document.querySelector(".artist-modal"),l=document.querySelector(".artist-info");l.innerHTML=f(a),r.classList.remove("hidden-artist-modal")}catch(e){console.error("Error loading artist info:",e)}})}),document.querySelector(".close-artist-modal").addEventListener("click",()=>{document.querySelector(".artist-modal").classList.add("hidden-artist-modal")})}function f(t){var s,i;return`
     <h2 class="artist-name">${t.strArtist}</h2>
     <div class="det_info">
       <img src="${t.strArtistThumb}" class="artist-img" alt="${t.strArtist}">
       <ul class="artist-details">
-        <li>Years active: ${t.intFormedYear||"?"} – ${t.intDiedYear||"present"}</li>
-        <li>Sex: ${t.strGender||"?"}</li>
-        <li>Members: ${t.intMembers||"?"}</li>
-        <li>Country: ${t.strCountry||"?"}</li>
-        <li>Biography: ${t.strBiographyEN||"No info"}</li>
+        <li>Years active<br>
+        ${t.intFormedYear||"?"} – ${t.intDiedYear||"present"}</li>
+        <li>Sex<br>
+        ${t.strGender||"?"}</li>
+        <li>Members<br>
+        ${t.intMembers||"?"}</li>
+        <li>Country<br>
+        ${t.strCountry||"?"}</li>
+        <li>Biography<br>
+        ${t.strBiographyEN||"No info"}</li>
         <li>
-          Genres:
-          <ul class="artist-genres">
+          <ul class="artist-modal-genres">
             ${((s=t.genres)==null?void 0:s.map(n=>`<li>${n}</li>`).join(""))||"No genres"}
           </ul>
         </li>
@@ -20,7 +24,7 @@ import{a as o,S as m,N as g,P as f}from"./assets/vendor-DeWL0fjv.js";(function()
       <h3 class="alb">Albums</h3>
       <div class="albums-grid">
         ${(i=t.albumsList)==null?void 0:i.map(n=>{var e;return`
-          <div class="album-card">
+          <div class="album-modal-card">
             <h4>${n.strAlbum}</h4>
             <div class="track-table">
               <div class="track-header">
@@ -32,9 +36,14 @@ import{a as o,S as m,N as g,P as f}from"./assets/vendor-DeWL0fjv.js";(function()
                 ${(e=n.tracks)==null?void 0:e.map(a=>`
                   <div class="track-row">
                     <div class="track-name">${a.strTrack}</div>
-                    <div class="track-time">${a.strTime||""}</div>
+                    <div class="track-time">${(a.intDuration/6e4).toFixed(2)||""}</div>
                     <div class="track-link">
-                      ${a.movie?`<a href="${a.movie}" target="_blank">🎬</a>`:""}
+                      ${a.movie?`
+                        <a href="${a.movie}" target="_blank">
+                          <svg width="24px" height="24px" class="youtube-modal">
+                            <use href="/img/icons.svg#icon-Youtube"></use>
+                          </svg>
+                        </a>`:""}
                     </div>
                   </div>
                 `).join("")}
@@ -94,7 +103,7 @@ import{a as o,S as m,N as g,P as f}from"./assets/vendor-DeWL0fjv.js";(function()
                 <p class="review">"${r}"</p>
                 <p class="review-author-name">${e}</p>
             </div>
-        </div>`).join("");s.insertAdjacentHTML("beforeend",i),$(t.length);const n=new m(".swiper",{modules:[g,f],direction:"horizontal",loop:!0,pagination:{el:".swiper-pagination",type:"custom",renderCustom:function(e,a,r){return L()}},navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},on:{slideChange:function(){c(this.realIndex+1,t.length)}}});document.querySelector(".swiper-button-next").addEventListener("click",()=>n.slideNext()),document.querySelector(".swiper-button-prev").addEventListener("click",()=>n.slidePrev()),c(1,t.length)}function $(t){const s=document.querySelector(".swiper-pagination");s.innerHTML=`
+        </div>`).join("");s.insertAdjacentHTML("beforeend",i),$(t.length);const n=new m(".swiper",{modules:[g,v],direction:"horizontal",loop:!0,pagination:{el:".swiper-pagination",type:"custom",renderCustom:function(e,a,r){return L()}},navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},on:{slideChange:function(){c(this.realIndex+1,t.length)}}});document.querySelector(".swiper-button-next").addEventListener("click",()=>n.slideNext()),document.querySelector(".swiper-button-prev").addEventListener("click",()=>n.slidePrev()),c(1,t.length)}function $(t){const s=document.querySelector(".swiper-pagination");s.innerHTML=`
         <span class="swiper-pagination-bullet custom-bullet" data-position="first" aria-label="First slide"></span>
         <span class="swiper-pagination-bullet custom-bullet" data-position="middle" aria-label="Middle slides"></span>
         <span class="swiper-pagination-bullet custom-bullet" data-position="last" aria-label="Last slide"></span>`}function L(t,s){return`
@@ -105,5 +114,5 @@ import{a as o,S as m,N as g,P as f}from"./assets/vendor-DeWL0fjv.js";(function()
                 <use href="#star-filled"></use>
             </svg>`).join("");return`<div class="rating star-svg value-${i}" aria-label="Rating ${i} out of 5">
         <div class="star-container">${n}</div>
-        </div>`}o.defaults.baseURL="https://sound-wave.b.goit.study/api";async function A(){const i=await u(1);console.log(`Artists: ${JSON.stringify(i)}`),await p(i,1,8),d();const n=await b();console.log(`Review: ${JSON.stringify(n)}`),await w(n.data)}A();
+        </div>`}o.defaults.baseURL="https://sound-wave.b.goit.study/api";async function M(){const i=await u(1);console.log(`Artists: ${JSON.stringify(i)}`),await p(i,1,8),d();const n=await b();console.log(`Review: ${JSON.stringify(n)}`),await w(n.data)}M();
 //# sourceMappingURL=index.js.map
