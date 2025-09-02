@@ -11,27 +11,34 @@ export async function getArtists(page = 1, limit = 8) {
 
 function createArtistCard(artist) {
   return `
-    <div class="artist-card">
-      <img class="artist-photo" src="${artist.strArtistThumb || 'https://via.placeholder.com/150'}" alt="${artist.strArtist}" />
+    <li class="artist-card">
+      <img 
+        class="artist-photo" 
+        src="${artist.strArtistThumb || 'https://via.placeholder.com/150'}" 
+        alt="${artist.strArtist}" 
+      />
 
-      <div class="artist-genres">
+      <ul class="artist-genres">
         ${artist.genres
-          ?.map(genre => `<span>${genre}</span>`)
+          ?.map(genre => `<li>${genre}</li>`)
           .join('') || ''}
-      </div>
+      </ul>
 
       <h3 class="artist-name">${artist.strArtist}</h3>
+
       <p class="artist-description">
-        ${artist.strBiographyEN ? artist.strBiographyEN.slice(0, 100) + '...' : 'No description'}
+        ${artist.strBiographyEN 
+          ? artist.strBiographyEN.slice(0, 100) + '...' 
+          : 'No description'}
       </p>
 
       <button class="learn-more" data-id="${artist._id}">
         Learn More
-        <svg class="icon-artists-learn-more" width="24" height="24">
-                <use href="/img/icons.svg#icon-learn-more"></use>
-              </svg>
+        <svg class="icon-artists-learn-more" width="8" height="24">
+          <use href="/img/icons.svg#icon-learn-more"></use>
+        </svg>
       </button>
-    </div>
+    </li>
   `;
 }
 
@@ -40,7 +47,7 @@ export async function renderArtists(data, page, limit) {
   const loadMoreBtn = document.querySelector('[data-artists-load]');
   const loader = document.querySelector('[data-artists-loader]');
 
-  loader.hidden = false;
+  loader.hidden = false; 
   loadMoreBtn.hidden = true;
 
   grid.insertAdjacentHTML(
@@ -48,11 +55,12 @@ export async function renderArtists(data, page, limit) {
     data.artists.map(createArtistCard).join('')
   );
 
+    loader.hidden = true;
+  
   if (page * limit < data.totalArtists) {
     loadMoreBtn.hidden = false;
   }
-  
-  
+
   loadMoreBtn?.addEventListener('click', async () => {
     page++;
     const artists = await getArtists(page);
