@@ -1,12 +1,11 @@
 
 import './js/artists-section.js'
 import './js/menu'
-import './js/modal'
-import './js/modal-feedback'
 import './js/artist-modal'
 import './js/feedback'
 import './js/artists-section'
-
+import './js/modal-feedback'
+import './js/modal'
 
 import axios from 'axios';
 import iziToast from 'izitoast';
