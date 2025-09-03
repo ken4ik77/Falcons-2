@@ -132,19 +132,6 @@
     margin-bottom: 16px !important;
 }
 
-.feedback-card .review-author-name {
-    margin: 0 0 16px;
-}
-
-.review-container .review,
-.review-container .review-author-name {
-    margin: 0 !important;
-    height: 0;
-    line-height: 0;
-    font-size: 0;
-    overflow: hidden;
-}
-
 .icon-arrow {
     fill: #fff;
     width: 14px;
@@ -154,12 +141,14 @@
 }
 
 .swiper .swiper-pagination {
+    height: 28px;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 8px;
     position: relative;
     bottom: auto;
-    margin-top: 32px;
+    transform: translateY(-45%);
 }
 
 .swiper .swiper-pagination .swiper-pagination-bullet {
@@ -178,6 +167,31 @@
 
 .swiper .swiper-pagination .swiper-pagination-bullet-active {
     background-color: #fff;
+}
+
+.leave-feedback {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
+    border-radius: 12px;
+    padding: 10px 24px;
+    width: 288px;
+    height: 47px;
+    box-shadow: 0 1px 2px 0 rgba(6, 3, 7, 0.05), inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(6, 3, 7, 0.15), inset 0 2px 1px 0 rgba(255, 255, 255, 0.25), inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+    background: #764191;
+    position: relative;
+}
+
+.leave-feedback:hover,
+.leave-feedback:focus {
+    opacity: 0.6;
 }
 
 @media only screen and (max-width: 768px) {
@@ -213,6 +227,13 @@
         font-weight: 600;
         line-height: 1.5;
     }
+
+    .leave-feedback {
+        width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 64px;
+    }
 }
 
 @media only screen and (min-width: 1440px) {
@@ -238,6 +259,12 @@
 
     .feedback-card .review-author-name {
         margin-bottom: 0;
+    }
+
+    .leave-feedback {
+        width: 170px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
