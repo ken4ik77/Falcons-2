@@ -4,32 +4,37 @@ import axios from 'axios';
 
 export async function listenArtistsSection() {
   const learnBtns = document.querySelectorAll('.learn-more');
+  const loader = document.querySelector('[data-artists-loader]');
+
   learnBtns.forEach(btn => {
     btn.addEventListener('click', async () => {
+      loader.hidden = false;
       const artistId = btn.dataset.id;
+
       try {
         const response = await axios.get(`/artists/${artistId}/albums`);
         const artist = response.data;
-        console.log(`Artist: ${JSON.stringify(artist)}`);
 
         const modal = document.querySelector('.artist-modal');
         const modalContent = document.querySelector('.artist-info');
         modalContent.innerHTML = renderArtistModal(artist);
-        console.log(`modal.classList: ${modal.classList}`);
         modal.classList.remove('hidden-artist-modal');
-        console.log(`modal.classList: ${modal.classList}`);
       } catch (error) {
         console.error('Error loading artist info:', error);
+      } finally {
+        loader.hidden = true;
       }
     });
   });
+}
 
-  const closeBtn = document.querySelector('.close');
+  const closeBtn = document.querySelector('.close-artist-modal');
   closeBtn.addEventListener('click', () => {
     const modal = document.querySelector('.artist-modal');
     modal.classList.add('hidden-artist-modal');
   });
-}
+
+
 
 function renderArtistModal(artist) {
   return `
@@ -37,14 +42,18 @@ function renderArtistModal(artist) {
     <div class="det_info">
       <img src="${artist.strArtistThumb}" class="artist-img" alt="${artist.strArtist}">
       <ul class="artist-details">
-        <li>Years active: ${artist.intFormedYear || '?'} – ${artist.intDiedYear || 'present'}</li>
-        <li>Sex: ${artist.strGender || '?'}</li>
-        <li>Members: ${artist.intMembers || '?'}</li>
-        <li>Country: ${artist.strCountry || '?'}</li>
-        <li>Biography: ${artist.strBiographyEN || 'No info'}</li>
+        <li>Years active<br>
+        ${artist.intFormedYear || '?'} – ${artist.intDiedYear || 'present'}</li>
+        <li>Sex<br>
+        ${artist.strGender || '?'}</li>
+        <li>Members<br>
+        ${artist.intMembers || '?'}</li>
+        <li>Country<br>
+        ${artist.strCountry || '?'}</li>
+        <li>Biography<br>
+        ${artist.strBiographyEN || 'No info'}</li>
         <li>
-          Genres:
-          <ul class="artist-genres">
+          <ul class="artist-modal-genres">
             ${artist.genres?.map(g => `<li>${g}</li>`).join('') || 'No genres'}
           </ul>
         </li>
@@ -54,7 +63,7 @@ function renderArtistModal(artist) {
       <h3 class="alb">Albums</h3>
       <div class="albums-grid">
         ${artist.albumsList?.map(album => `
-          <div class="album-card">
+          <div class="album-modal-card">
             <h4>${album.strAlbum}</h4>
             <div class="track-table">
               <div class="track-header">
@@ -66,9 +75,14 @@ function renderArtistModal(artist) {
                 ${album.tracks?.map(track => `
                   <div class="track-row">
                     <div class="track-name">${track.strTrack}</div>
-                    <div class="track-time">${track.strTime || ''}</div>
+                    <div class="track-time">${(track.intDuration / 60000).toFixed(2) || ''}</div>
                     <div class="track-link">
-                      ${track.movie ? `<a href="${track.movie}" target="_blank">🎬</a>` : ''}
+                      ${track.movie ? `
+                        <a href="${track.movie}" target="_blank">
+                          <svg width="24px" height="24px" class="youtube-modal">
+                            <use href="/img/icons.svg#icon-Youtube"></use>
+                          </svg>
+                        </a>` : ''}
                     </div>
                   </div>
                 `).join('')}

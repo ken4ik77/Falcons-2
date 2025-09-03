@@ -99,16 +99,17 @@
   margin-bottom: 16px;
 }
 
-.artist-genres span {
-  font-family: var(--font-family);
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 150%;
-  color: var(--color-white);
-  background-color: var(--opacity-transparent);
-  border: 1px solid var(--opacity-white-20);
-  border-radius: 6px;
-  padding: 4px 10px;
+
+.artist-genres li {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--color-white);
+    background-color: var(--opacity-transparent);
+    border: 1px solid var(--opacity-white-20);
+    border-radius: 6px;
+    padding: 4px 10px;
 }
 
 .artist-description {
