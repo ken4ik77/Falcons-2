@@ -7,6 +7,7 @@ import './js/artists-section'
 import './js/modal-feedback'
 import './js/modal'
 
+
 import axios from 'axios';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
