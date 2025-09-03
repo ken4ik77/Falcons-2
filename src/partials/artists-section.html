@@ -26,3 +26,171 @@
     ></div>
   </div>
 </section>
+
+<!---*****************************************************************--->
+<section class="artists-section" aria-labelledby="artists-heading">
+  <div class="container">
+    <div class="artists-layout">
+      <!-- ===================== FILTERS ===================== -->
+      <aside class="filters" aria-label="Filters">
+        <div class="filters__head">
+          <h2 class="filters__title" id="filters-title">Filters</h2>
+          <button
+            type="button"
+            class="filters__reset"
+            aria-label="Reset all filters"
+            disabled
+          >
+            Reset
+          </button>
+        </div>
+
+        <!-- Search -->
+        <label class="filters__field" for="artist-search">
+          <span class="filters__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M21 21l-4.2-4.2M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </span>
+        </label>
+        <input
+          id="artist-search"
+          class="filters__input"
+          type="search"
+          name="q"
+          placeholder="Search"
+          aria-label="Search artists"
+        />
+
+        <!-- Sorting -->
+        <div class="filters__select" data-name="sorting">
+          <button
+            type="button"
+            class="filters__select-label"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-label="Sorting options"
+          >
+            Sorting
+            <svg
+              class="filters__chevron"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M7 10l5 5 5-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+          <ul class="filters__menu" role="listbox" aria-label="Sorting options">
+            <li role="option" tabindex="0" aria-selected="true">Default</li>
+            <li role="option" tabindex="0">A-Z</li>
+            <li role="option" tabindex="0">Z-A</li>
+          </ul>
+        </div>
+
+        <!-- Genre -->
+        <div class="filters__select" data-name="genre">
+          <button
+            type="button"
+            class="filters__select-label"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-label="Select genre"
+          >
+            Genre
+            <svg
+              class="filters__chevron"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M7 10l5 5 5-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+          <ul class="filters__menu" role="listbox" aria-label="Select genre">
+            <li role="option" tabindex="0" aria-selected="true">All Genres</li>
+            <li role="option" tabindex="0">Rock</li>
+            <li role="option" tabindex="0">Pop</li>
+            <li role="option" tabindex="0">Hip-hop</li>
+            <li role="option" tabindex="0">Jazz</li>
+            <li role="option" tabindex="0">Classical</li>
+            <li role="option" tabindex="0">Electronic</li>
+            <li role="option" tabindex="0">Reggae</li>
+          </ul>
+        </div>
+      </aside>
+      <!-- =================== /FILTERS ===================== -->
+
+      <!-- ===================== CONTENT ===================== -->
+      <div class="artists-content">
+        <header class="artists-header">
+          <h2 id="artists-heading" class="artists-title">
+            Explore Your New Favorite Artists
+          </h2>
+        </header>
+
+        <!-- Грід карток -->
+        <ul class="artists-grid">
+          <li class="artist-card">
+            <a
+              href="#"
+              class="artist-card__link"
+              aria-label="Open profile of Walter Under"
+            >
+              <img
+                src="./img/placeholder-1.jpg"
+                alt="Portrait of Walter Under"
+                class="artist-card__img"
+                loading="lazy"
+              />
+              <div class="artist-card__body">
+                <h3 class="artist-card__name">Walter Under</h3>
+                <p class="artist-card__genre">Rock</p>
+              </div>
+            </a>
+          </li>
+          <li class="artist-card">
+            <a
+              href="#"
+              class="artist-card__link"
+              aria-label="Open profile of Lily Groan"
+            >
+              <img
+                src="./img/placeholder-2.jpg"
+                alt="Portrait of Lily Groan"
+                class="artist-card__img"
+                loading="lazy"
+              />
+              <div class="artist-card__body">
+                <h3 class="artist-card__name">Lily Groan</h3>
+                <p class="artist-card__genre">Jazz</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- =================== /CONTENT ===================== -->
+    </div>
+  </div>
+</section>
+
+<!---*****************************************************************--->

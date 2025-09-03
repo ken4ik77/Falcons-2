@@ -76,15 +76,21 @@ li{
 }
 
 .artist-modal p span.genre {
-      padding: 4px 8px;
+   padding: 4px 8px;
    border-radius: 4px;
    margin-right: 5px;
    font-size: 12px;
 }
 
 .track-link {
-   display: inline-block;
    text-decoration: none;
+   cursor: pointer;
+   max-width: 24px;
+   max-height: 24px;
+}
+
+.track-time{
+   text-align: center;
 }
 
 .artist-details{
@@ -117,15 +123,13 @@ li{
 
 .track-table {
    table-layout: fixed;
-   align-items: center;
 }
 
 .track-header, .track-row {
    display: grid;
-   grid-template-columns: 1fr 60px auto;
+   grid-template-columns: 1fr 60px 30px;
    align-items: center;
    border-radius: 8px;
-   
 }
 
 .track-header {
@@ -136,10 +140,6 @@ li{
    font-weight: 600;
    font-size: 8px;
    line-height: 1.5;
-}
-
-.track-time{
-   padding-left: 4px;
 }
 
 .track-row:nth-child(even) {
@@ -212,18 +212,18 @@ li{
          gap: 48px;
       }
 
-            .albums-grid {
-               display: grid;
-               grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-               gap: 32px;
-            }
+      .albums-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+         gap: 32px;
+      }
       
-            .album-modal-card {
-               background: #1e1e1e;
-               border-radius: 14px;
-               height: 100%;
-               margin-bottom: 32px;
-            }
+      .album-modal-card {
+         background: #1e1e1e;
+         border-radius: 14px;
+         height: 100%;
+         margin-bottom: 32px;
+      }
 
 }
 

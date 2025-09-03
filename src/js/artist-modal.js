@@ -4,9 +4,13 @@ import axios from 'axios';
 
 export async function listenArtistsSection() {
   const learnBtns = document.querySelectorAll('.learn-more');
+  const loader = document.querySelector('[data-artists-loader]');
+
   learnBtns.forEach(btn => {
     btn.addEventListener('click', async () => {
+      loader.hidden = false;
       const artistId = btn.dataset.id;
+
       try {
         const response = await axios.get(`/artists/${artistId}/albums`);
         const artist = response.data;
@@ -17,16 +21,20 @@ export async function listenArtistsSection() {
         modal.classList.remove('hidden-artist-modal');
       } catch (error) {
         console.error('Error loading artist info:', error);
+      } finally {
+        loader.hidden = true;
       }
     });
   });
+}
 
   const closeBtn = document.querySelector('.close-artist-modal');
   closeBtn.addEventListener('click', () => {
     const modal = document.querySelector('.artist-modal');
     modal.classList.add('hidden-artist-modal');
   });
-}
+
+
 
 function renderArtistModal(artist) {
   return `
