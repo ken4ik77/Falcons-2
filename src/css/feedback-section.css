@@ -174,7 +174,7 @@
     justify-content: center;
     gap: 12px;
     width: 100%;
-    margin-top: 32px;
+    margin-top: 16px;
     padding-top: 10px;
     padding-bottom: 10px;
     font-family: var(--font-family);
@@ -240,7 +240,7 @@
         width: 340px;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 64px;
+        margin-top: 16px;
     }
 }
 
@@ -271,6 +271,7 @@
 
     .leave-feedback {
         width: 170px;
+        margin-top: 80px;
         margin-left: auto;
         margin-right: auto;
     }
