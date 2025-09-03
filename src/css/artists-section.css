@@ -2,8 +2,11 @@
   display: none !important;
 }
 
-.artists .container {
+.artists {
   background-color: var(--color-scheme-1-background);
+}
+
+.artists .container {
   padding: 64px 16px;
 }
 
@@ -199,8 +202,8 @@
   }
 }
 
-@media only screen and (min-width: 1440px) {
-  .artists .container {
+@media only screen and (min-width: 1312px) {
+  .artists .container {    
     padding: 112px 64px;
   }
 
