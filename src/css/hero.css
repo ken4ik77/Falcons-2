@@ -70,6 +70,7 @@
   background: var(--color-affair);
   text-align: center;
   margin-right: 12px;
+  margin: 0 auto;
 }
 .hero-btn {
   font-family: var(--font-family);
@@ -109,14 +110,17 @@
     width: 100%;
   }
   .hero-content {
-    margin-bottom: 24px;
+    padding: 64px 0 0;
+    margin-bottom: 32px;
   }
   .hero-text {
     max-width: 624px;
     width: 100%;
+    margin-bottom: 32px;
   }
   .link-hero {
     width: 246px;
+    margin: 0;
   }
   .backgr-hero {
     width: 704px;
