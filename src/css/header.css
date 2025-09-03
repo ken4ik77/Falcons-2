@@ -144,6 +144,7 @@ header {
   font-size: 26px;
   line-height: 39px;
   color: var(--color-scheme-1-text);
+  font-family: var(--font-family);
 }
 
 .mobile-nav-style:hover {
@@ -182,13 +183,19 @@ header {
     color: var(--color-scheme-1-text);
   }
 
+.mobile-nav-style{
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+}
+
   .burger-bth,
   .mobile-menu {
     display: none;
   }
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1312px) {
 
 
   .header-container{
