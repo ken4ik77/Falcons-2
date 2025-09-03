@@ -16,7 +16,7 @@
     <script type="module" crossorigin src="/Falcons-2/index.js"></script>
     <link rel="modulepreload" crossorigin href="/Falcons-2/assets/vendor-DeWL0fjv.js">
     <link rel="stylesheet" crossorigin href="/Falcons-2/assets/vendor-CT7lxyS-.css">
-    <link rel="stylesheet" crossorigin href="/Falcons-2/assets/index-DVkPxZJF.css">
+    <link rel="stylesheet" crossorigin href="/Falcons-2/assets/index-D9utKyuY.css">
   </head>
   <body>
     <header>
@@ -109,13 +109,6 @@
       </svg>
       <span class="spinner spinner--btn" data-btn-spinner hidden></span>
     </button>
-
-    <div
-      class="toast-root"
-      aria-live="polite"
-      aria-atomic="true"
-      data-toast-root
-    ></div>
   </div>
 </section>
 
@@ -205,7 +198,10 @@
   </div>
   <div class="container">
     <h2 class="visually-hidden">Feedbacks our visitors</h2>
-    <div id="loader"></div>
+    <div class="feedback-loader" data-feedbacks-loader hidden>
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="sr-only">Loading…</span>
+    </div>
     <div class="swiper feedback-swiper">
       <div class="swiper-wrapper" id="feedback-list"></div>
       <div class="review-container"></div>
@@ -270,11 +266,10 @@
 </div>
 
       <div class="artist-modal hidden-artist-modal">
-
-    <div class="artists__loader" data-artists-loader hidden>
-      <span class="spinner" aria-hidden="true"></span>
-      <span class="sr-only">Loading…</span>
-    </div>
+  <div class="artist-loader" data-artist-loader hidden>
+    <span class="spinner" aria-hidden="true"></span>
+    <span class="sr-only">Loading…</span>
+  </div>
 
   <div class="modal-content">
     <button class="close-artist-modal">
