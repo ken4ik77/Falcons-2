@@ -1,9 +1,9 @@
-.ab-us-cont{
+.about-us{
   background-color: var(--color-scheme-1-background);
-padding: 64px 16px;
-margin: 0 auto;
 }
-
+.ab-us-cont{
+  padding: 64px 16px;
+}
 
 .ab-us-picture {
   border-radius: 16px;
@@ -54,19 +54,17 @@ color: var(--color-scheme-1-text);
     width: 80px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1312px) {
    .ab-us-cont {
      padding: 112px 64px;
+     display: flex;
     }
-  .about-us{
-    display: flex;
-  }
     
     .ab-us-title{
         font-size: 60px;
     }
     .content-ab-wrap{
-        max-width: 50%;
+        width: 50%;
         margin-top: 0;
         margin-left: 32px;
         justify-content: center;
