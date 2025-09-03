@@ -23,14 +23,30 @@ axios.defaults.baseURL = 'https://sound-wave.b.goit.study/api';
 async function fetchData() {
   const currentPage = 1;
   const limit = 8;
-  const artists = await getArtists(currentPage);
-  console.log(`Artists: ${JSON.stringify(artists)}`);
-  await renderArtists(artists, currentPage, limit);
-  listenArtistsSection();
 
-  const reviews = await getReviewsByQuery();
-  console.log(`Review: ${JSON.stringify(reviews)}`);
-  await handleReviews(reviews.data);
+  const artistLoader = document.querySelector('[data-artists-loader]');
+  artistLoader.hidden = false;
+
+  const feedbackLoader = document.querySelector('[data-feedbacks-loader]');
+  feedbackLoader.hidden = false;
+
+  try {
+    const artists = await getArtists(currentPage);
+    console.log(`Artists: ${JSON.stringify(artists)}`);
+    const reviews = await getReviewsByQuery();
+    console.log(`Review: ${JSON.stringify(reviews)}`);
+
+    await renderArtists(artists, currentPage, limit);
+    listenArtistsSection();
+    await handleReviews(reviews.data);
+  } catch (error) {
+    const message = 'Error while executing the request'; 
+    console.error(message);
+    alert(`❌${message}`)
+  } finally {
+    artistLoader.hidden = true;
+    feedbackLoader.hidden = true;
+  }
 }
 
 fetchData();
