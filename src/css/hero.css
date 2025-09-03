@@ -102,7 +102,6 @@
 @media screen and (min-width: 768px) {
   .hero-cont {
     max-width: 1024px;
-    margin-bottom: 32px;
   }
   .hero-header {
     max-width: 624px;
