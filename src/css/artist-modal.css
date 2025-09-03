@@ -3,6 +3,13 @@
    padding: 0;
 }
 
+.artist-loader {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 20px 0;
+}
+
 li{
    list-style: none;
 }

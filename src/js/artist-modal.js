@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export async function listenArtistsSection() {
   const learnBtns = document.querySelectorAll('.learn-more');
-  const loader = document.querySelector('[data-artists-loader]');
+  const loader = document.querySelector('[data-artist-loader]');
 
   learnBtns.forEach(btn => {
     btn.addEventListener('click', async () => {
@@ -21,7 +21,9 @@ export async function listenArtistsSection() {
         modal.classList.remove('hidden-artist-modal');
         document.body.classList.toggle("no-scroll");
       } catch (error) {
-        console.error('Error loading artist info:', error);
+        const message = `Error while executing the request: ${error}`; 
+        console.error(message);
+        alert(`❌${message}`)
       } finally {
         loader.hidden = true;
       }

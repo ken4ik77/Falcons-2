@@ -135,10 +135,14 @@
   }
   .hero-header {
     max-width: 640px;
+    font-size: 84px;
   }
   .hero-content {
     width: 640px;
     align-content: center;
+  }
+  .hero-text {
+    font-size: 20px;
   }
   .backgr-hero {
     width: 641px;

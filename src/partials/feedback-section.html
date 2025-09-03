@@ -22,7 +22,10 @@
   </div>
   <div class="container">
     <h2 class="visually-hidden">Feedbacks our visitors</h2>
-    <div id="loader"></div>
+    <div class="feedback-loader" data-feedbacks-loader hidden>
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="sr-only">Loading…</span>
+    </div>
     <div class="swiper feedback-swiper">
       <div class="swiper-wrapper" id="feedback-list"></div>
       <div class="review-container"></div>
