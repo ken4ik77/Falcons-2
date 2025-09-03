@@ -1,8 +1,9 @@
-.about-us {
-background-color: var(--color-scheme-1-background);
+.ab-us-cont{
+  background-color: var(--color-scheme-1-background);
 padding: 64px 16px;
 margin: 0 auto;
 }
+
 
 .ab-us-picture {
   border-radius: 16px;
@@ -39,9 +40,8 @@ color: var(--color-scheme-1-text);
 }
 
 @media (min-width: 768px) {
-  .about-us{
-    padding: 64px 32px;
-  }
+  .ab-us-cont{ padding: 64px 32px;}
+  
   .ab-us-text{
     font-size: 20px;
   }
@@ -55,10 +55,13 @@ color: var(--color-scheme-1-text);
   }
 }
 @media (min-width: 1200px) {
-   .about-us {
+   .ab-us-cont {
      padding: 112px 64px;
-     display: flex;
     }
+  .about-us{
+    display: flex;
+  }
+    
     .ab-us-title{
         font-size: 60px;
     }
