@@ -32,7 +32,7 @@
   }
 
   // рейтинг
-  const stars = document.querySelectorAll(".rating .star");
+  const stars = document.querySelectorAll(".rating-feedback-modal .star");
   let currentRating = 0;
 
   stars.forEach((star, index) => {
