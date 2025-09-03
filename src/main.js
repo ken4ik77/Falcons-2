@@ -40,7 +40,7 @@ async function fetchData() {
     listenArtistsSection();
     await handleReviews(reviews.data);
   } catch (error) {
-    const message = 'Error while executing the request'; 
+    const message = `Error while executing the request: ${error}`; 
     console.error(message);
     alert(`❌${message}`)
   } finally {
