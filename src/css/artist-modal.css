@@ -44,11 +44,16 @@ li{
 
 .close-artist-modal {
    position: absolute;
-   font-size: 28px;
    background: none;
    border: none;
-   right: 0;
+   top: 16px;
+   right: 16px;
    cursor: pointer;
+   width: 32px;
+   height: 32px;
+   display: flex ;
+   justify-content: center;
+   align-items: center;
    padding: 16px;
 }
 
@@ -61,6 +66,8 @@ li{
 
 .close-modal{
    fill: #fff;
+   position: absolute;
+   transform: translateX(10%), translateY(10%) !important;
 }
 
 .artist-img{
@@ -182,7 +189,7 @@ li{
    padding: 8px 12px;
 }
 
-@media (min-width: 321px) {
+@media (min-width: 768px) {
 
       .alb{
          padding-bottom: 16px;
@@ -227,7 +234,7 @@ li{
 
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1440px) {
    .det_info{
       flex-direction: row;
    }

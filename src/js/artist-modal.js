@@ -19,6 +19,7 @@ export async function listenArtistsSection() {
         const modalContent = document.querySelector('.artist-info');
         modalContent.innerHTML = renderArtistModal(artist);
         modal.classList.remove('hidden-artist-modal');
+        document.body.classList.toggle("no-scroll");
       } catch (error) {
         console.error('Error loading artist info:', error);
       } finally {
@@ -28,11 +29,28 @@ export async function listenArtistsSection() {
   });
 }
 
-  const closeBtn = document.querySelector('.close-artist-modal');
-  closeBtn.addEventListener('click', () => {
-    const modal = document.querySelector('.artist-modal');
-    modal.classList.add('hidden-artist-modal');
-  });
+
+const modal = document.querySelector('.artist-modal');
+const closeBtn = document.querySelector('.close-artist-modal');
+
+function closeModal() {
+  modal.classList.add('hidden-artist-modal');
+  document.body.classList.remove("no-scroll");
+}
+
+closeBtn.addEventListener('click', closeModal);
+
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    closeModal();
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !modal.classList.contains("hidden-artist-modal")) {
+    closeModal();
+  }
+});
 
 
 
