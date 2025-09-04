@@ -8,14 +8,15 @@
 .footer {
   background-color:#060307;;
   color: #fff;
-  padding: 48px 16px 48px;
+  padding-top: 48px;
+  padding-bottom: 48px ;
   font-family: "Inter", sans-serif;
   font-size: 14px;
   line-height: 1.5;
   width: 100%;
 
 }
-
+ 
 /* верхній ряд */
 .footer__top {
   display: flex;
@@ -44,6 +45,7 @@
   margin: 0;
   padding: 0;
   justify-content: center;
+  text-align: center;
 }
 
 .footer__link {
@@ -109,7 +111,11 @@
 /* планшет і більше */
 @media (min-width: 768px) {
   .footer {
-    padding: 80px 32px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .footer__container {
+    padding: 0 32px;
   }
 
   .footer__copy {
@@ -150,7 +156,11 @@
 /* десктоп */
 @media (min-width: 1440px) {
   .footer {
-    padding: 80px 64px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .footer__container {
+    padding: 0 64px;
   }
 
   .footer__nav ul {
