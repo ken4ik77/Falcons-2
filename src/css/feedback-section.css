@@ -25,7 +25,7 @@
 .feedback-section {
     background-color: var(--color-scheme-1-background);
     color: var(--color-white);
-    padding: 64px 16px;
+    padding: 64px 0;
 }
 
 .feedback-swiper {
@@ -226,7 +226,7 @@
 
 @media only screen and (min-width: 768px) {
     .feedback-section {
-        padding: 64px 32px;
+        padding: 64px 0;
     }
 
     .feedback-card {
@@ -253,7 +253,7 @@
 
 @media only screen and (min-width: 1440px) {
     .feedback-section {
-        padding: 112px 64px;
+        padding: 112px 0;
     }
 
     .feedback-card {
