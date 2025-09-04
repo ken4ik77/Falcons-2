@@ -196,6 +196,35 @@ li{
    padding: 8px 12px;
 }
 
+/* Scroll */
+::-webkit-scrollbar {
+   width: 10px;
+}
+
+::-webkit-scrollbar-track {
+   background: transparent;
+   border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+   background: var(--color-affair);
+   opacity: 0.6;
+   border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+   background: var(--color-affair);
+   opacity: 1;
+}
+
+* {
+   scrollbar-width: thin;
+   /* тонкий скрол */
+   scrollbar-color: var(--color-affair) transparent;
+   /* thumb + трек */
+}
+
+
 @media (min-width: 768px) {
 
       .alb{
