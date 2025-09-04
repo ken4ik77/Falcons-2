@@ -1,3 +1,4 @@
+import axios from 'axios';
 (() => {
   const refs = {
     openModalBtn: document.querySelector("[data-modal-feedback-open]"),
@@ -46,43 +47,37 @@
 
   // отправка формы
   refs.form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const name = refs.form.elements["name"].value.trim();
-    const descr = refs.form.elements["message"].value.trim();
-    const rating = currentRating;
+  const name = refs.form.elements["name"].value.trim();
+  const descr = refs.form.elements["message"].value.trim();
+  const rating = currentRating;
 
-      
-    if (name.length < 2 || name.length > 16) {
-      alert("Ім’я має бути від 2 до 16 символів.");
-      return;
-    }
-    if (rating < 1 || rating > 5) {
-      alert("Оберіть рейтинг від 1 до 5 зірок.");
-      return;
-    }
-    if (descr.length < 10 || descr.length > 512) {
-      alert("Повідомлення має бути від 10 до 512 символів.");
-      return;
-    }
+  if (name.length < 2 || name.length > 16) {
+    alert("Ім’я має бути від 2 до 16 символів.");
+    return;
+  }
+  if (rating < 1 || rating > 5) {
+    alert("Оберіть рейтинг від 1 до 5 зірок.");
+    return;
+  }
+  if (descr.length < 10 || descr.length > 512) {
+    alert("Повідомлення має бути від 10 до 512 символів.");
+    return;
+  }
 
-    try {
-      const res = await fetch("-", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, rating, descr }),
-      });
+  try {
+    const response = await axios.post('/feedbacks', { name, rating, descr });
 
-      if (!res.ok) throw new Error("Помилка сервера");
+    closeModal();
+    refs.form.reset();
+    currentRating = 0;
+    stars.forEach((s) => s.classList.remove("active"));
 
-      closeModal();
-      refs.form.reset();
-      currentRating = 0;
-      stars.forEach((s) => s.classList.remove("active"));
+    alert("Дякуємо за відгук!");
+  } catch (err) {
+    alert("Не вдалося відправити відгук: " + err.message);
+  }
+});
 
-      alert("Дякуємо за відгук!");
-    } catch (err) {
-      alert("Не вдалося відправити відгук: " + err.message);
-    }
-  });
 })();
