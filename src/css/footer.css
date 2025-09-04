@@ -16,10 +16,7 @@
   width: 100%;
 
 }
- .footer__container {
-   padding: 0 16px;
- }
-
+ 
 /* верхній ряд */
 .footer__top {
   display: flex;
