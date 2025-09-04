@@ -100,9 +100,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .hero-cont {
-    max-width: 1024px;
-  }
+  
   .hero-header {
     max-width: 624px;
     margin-bottom: 24px;
@@ -127,7 +125,7 @@
     background-image: url('../img/Hero/hero-tab.png');
   }
 }
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1312px) {
   .hero-cont {
     padding: 0px 64px;
     max-width: 1440px;
