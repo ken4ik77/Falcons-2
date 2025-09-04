@@ -8,13 +8,12 @@ html {
   scroll-padding-top: 64px;
 }
 
-
-.header-container {
+.header-container  {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 64px;
-  padding: 0 12px 0 20px;
+  padding: 0 24px 0 20px;
   max-width: 767px;
     width: 100%;
     margin: 0 auto;
