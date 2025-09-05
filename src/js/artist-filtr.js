@@ -1,3 +1,7 @@
+import axios from 'axios';
+import { renderArtists } from './artists-section';
+import { stackTraceLimit } from 'postcss/lib/css-syntax-error';
+
 let items = [];
 let allItems = [];
 let state = { page: 1, perPage: 8, search: '', genre: '', sort: '' };
@@ -189,10 +193,27 @@ export function initArtistFilterListeners() {
   const genreBtn = genreSelect?.querySelector('.filters__select-label'); //
   const genreMenu = document.querySelector('[data-genres]'); //
 
-  searchBtn.addEventListener('click', () => {
+  searchBtn.addEventListener('click', async () => {
     state.page = 1;
     state.search = searchInput.value.trim();
-    renderGrid(applyFilters(allItems));
+    const params = {
+      limit: 10,
+      page: 1,
+      name: state.search,
+      sortName: state.sort.slice(5) || 'asc',
+      ...(state.genre && { genre: state.genre })
+    };
+    console.log(`Params: ${JSON.stringify(params)}`);
+    let url;
+    if (state.genre !== '') {
+      url = `https://sound-wave.b.goit.study/api/artists?limit=10&page=1&name=${params.name}&sortName=${params.sortName}&genre=${state.genre}`;
+    } else {
+      url = `https://sound-wave.b.goit.study/api/artists?limit=10&page=1&name=${params.name}&sortName=${params.sortName}`;
+    }
+    console.log(`url: ${url}`);
+    const response = await axios.get(url);
+    console.log(`Response: ${JSON.stringify(response)}`);
+    renderArtists(applyFilters(response), state.page, 8);
     updateResetBtnState();
   });
 
@@ -203,7 +224,7 @@ export function initArtistFilterListeners() {
       state.page = 1;
 
     setSelectLabel(sortingSelect, e.target.textContent.trim());
-    renderGrid(applyFilters(allItems));
+    renderArtists(applyFilters(allItems), state.page, 8);
     updateResetBtnState();
 
     sortBtn.setAttribute('aria-expanded', 'false');
@@ -217,7 +238,7 @@ export function initArtistFilterListeners() {
     state.page = 1;
 
     setSelectLabel(genreSelect, e.target.textContent.trim());
-    renderGrid(applyFilters(allItems));
+    renderArtists(applyFilters(allItems), state.page, 8);
     updateResetBtnState();
 
     genreBtn.setAttribute('aria-expanded', 'false');
@@ -235,7 +256,7 @@ export function initArtistFilterListeners() {
     genreBtn?.setAttribute('aria-expanded', 'false');
     genreMenu?.classList.remove('open');
 
-    renderGrid(applyFilters(allItems));
+    renderArtists(applyFilters(allItems), state.page, state.perPage);
     updateResetBtnState();
   });
 }
