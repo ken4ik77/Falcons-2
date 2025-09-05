@@ -58,6 +58,9 @@
   width: 100%;
 }
 .link-hero {
+    display: flex;
+      align-items: center;
+      justify-content: center;
   border-radius: 12px;
   padding: 10px 24px;
   width: 280px;
@@ -73,6 +76,8 @@
   margin: 0 auto;
 }
 .hero-btn {
+  display: inline-flex;    align-items: center;
+  gap: 17px;
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 18px;
@@ -81,7 +86,7 @@
 }
 .icon-hero {
   fill: var(--color-scheme-1-text);
-  justify-content: center;
+
 }
 .backgr-hero {
   width: 280px;

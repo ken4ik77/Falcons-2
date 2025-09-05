@@ -74,7 +74,6 @@ li{
 .close-modal{
    fill: #fff;
    position: absolute;
-   transform: translateX(10%), translateY(10%) !important;
 }
 
 .artist-img{
