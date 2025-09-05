@@ -1,6 +1,6 @@
 import '../css/artist-modal.css';
 import axios from 'axios';
-
+import icons from '../img/icons.svg';
 
 export async function listenArtistsSection() {
   const learnBtns = document.querySelectorAll('.learn-more');
@@ -100,7 +100,7 @@ function renderArtistModal(artist) {
                       ${track.movie ? `
                         <a href="${track.movie}" target="_blank">
                           <svg width="24px" height="24px" class="youtube-modal">
-                            <use href="/img/icons.svg#icon-Youtube"></use>
+                            <use xlink:href="${icons}#icon-Youtube"></use>
                           </svg>
                         </a>` : ''}
                     </div>
