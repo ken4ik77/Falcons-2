@@ -1,12 +1,11 @@
-
-import './js/artists-section.js'
-import './js/menu'
-import './js/artist-modal'
-import './js/feedback'
-import './js/artists-section'
-import './js/modal-feedback'
-import './js/modal'
-
+import './js/artists-section.js';
+import './js/menu';
+import './js/artist-modal';
+import './js/feedback';
+import './js/artists-section';
+import './js/modal-feedback';
+import './js/modal';
+import './js/artist-filtr.js';
 
 import axios from 'axios';
 import iziToast from 'izitoast';
@@ -40,9 +39,9 @@ async function fetchData() {
     listenArtistsSection();
     await handleReviews(reviews.data);
   } catch (error) {
-    const message = `Error while executing the request: ${error}`; 
+    const message = `Error while executing the request: ${error}`;
     console.error(message);
-    alert(`❌${message}`)
+    alert(`❌${message}`);
   } finally {
     artistLoader.hidden = true;
     feedbackLoader.hidden = true;
