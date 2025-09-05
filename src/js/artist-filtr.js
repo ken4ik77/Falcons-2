@@ -17,9 +17,7 @@ const BASE_URL = 'https://sound-wave.b.goit.study/api/artists';
 function buildUrl({
   page = 1,
   perPage = 8, // локальна змінна для стану
-  search = '',
-  genre = '',
-  sort = '',
+  // search = '', genre = '', sort = '', // більше не відправляємо на сервер
 } = {}) {
   const params = new URLSearchParams();
 
@@ -28,9 +26,10 @@ function buildUrl({
   // ⚡ для API сервер очікує "limit" замість "perPage"
   params.set('limit', Number(perPage) || 8);
 
-  if (search && search.trim()) params.set('search', search.trim());
-  if (genre && genre.trim()) params.set('genre', genre.trim());
-  if (sort && sort.trim()) params.set('sort', sort.trim());
+  // ❌ сервер не підтримує search, genre, sort
+  // if (search && search.trim()) params.set('search', search.trim());
+  // if (genre && genre.trim()) params.set('genre', genre.trim());
+  // if (sort && sort.trim()) params.set('sort', sort.trim());
 
   return `${BASE_URL}?${params.toString()}`;
 }
@@ -97,10 +96,10 @@ function appendCards(list) {
 
 // ==================== Event Listeners ====================
 
-// Пошук (кнопка)
+// Пошук (кнопка) — залишаємо для локального фільтру на фронтенді
 searchBtn.addEventListener('click', async () => {
   state.page = 1;
-  state.search = searchInput.value.trim();
+  state.search = searchInput.value.trim(); // локальний стан
 
   try {
     await fetchArtists(state);
@@ -111,10 +110,10 @@ searchBtn.addEventListener('click', async () => {
   }
 });
 
-// Сортування (клік по пункту меню)
+// Сортування (клік по пункту меню) — локально
 sortMenu.addEventListener('click', async e => {
   if (e.target.dataset.value !== undefined) {
-    state.sort = e.target.dataset.value;
+    state.sort = e.target.dataset.value; // локальний стан
     state.page = 1;
 
     try {
@@ -127,10 +126,10 @@ sortMenu.addEventListener('click', async e => {
   }
 });
 
-// Вибір жанру
+// Вибір жанру — локально
 genreMenu.addEventListener('click', async e => {
   if (e.target.dataset.value !== undefined) {
-    state.genre = e.target.dataset.value;
+    state.genre = e.target.dataset.value; // локальний стан
     state.page = 1;
 
     try {
