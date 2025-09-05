@@ -16,7 +16,7 @@
     <script type="module" crossorigin src="/Falcons-2/index.js"></script>
     <link rel="modulepreload" crossorigin href="/Falcons-2/assets/vendor-DeWL0fjv.js">
     <link rel="stylesheet" crossorigin href="/Falcons-2/assets/vendor-CT7lxyS-.css">
-    <link rel="stylesheet" crossorigin href="/Falcons-2/assets/index-DW6KMDyF.css">
+    <link rel="stylesheet" crossorigin href="/Falcons-2/assets/index-DK6iX8CB.css">
   </head>
   <body>
     <header>
@@ -95,144 +95,22 @@
     <h2 class="artists__title">Artists</h2>
     <p class="artists__subtitle">Explore Your New Favorite Artists</p>
 
-    <div class="artists-layout ar">
-      <!-- Filters -->
-      <aside class="filters" aria-label="Filters">
-        <div class="filters__head">
-          <h2 class="filters__title" id="filters-title">Filters</h2>
-          <button
-            type="button"
-            class="filters__reset"
-            aria-label="Reset all filters"
-            disabled
-          >
-            Reset
-          </button>
-        </div>
-
-        <!-- Search -->
-        <div class="filters__field">
-          <input
-            id="artist-search"
-            class="filters__input"
-            type="search"
-            name="q"
-            placeholder="Search"
-            aria-label="Search artists"
-          />
-          <button type="button" class="filters__search-btn" aria-label="Search">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M21 21l-4.2-4.2M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
-          </button>
-        </div>
-
-        <!-- Sorting -->
-        <div class="filters__select" data-name="sorting">
-          <button
-            type="button"
-            class="filters__select-label"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-label="Sorting options"
-          >
-            <span>Sorting</span>
-            <svg
-              class="filters__chevron"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                d="M7 10l5 5 5-5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
-          </button>
-          <ul class="filters__menu" role="listbox" aria-label="Sorting options">
-            <li role="option" tabindex="0" data-value="" aria-selected="true">
-              Default
-            </li>
-            <li role="option" tabindex="0" data-value="name_asc">A-Z</li>
-            <li role="option" tabindex="0" data-value="name_desc">Z-A</li>
-          </ul>
-        </div>
-
-        <!-- Genre -->
-        <div class="filters__select" data-name="genre">
-          <button
-            type="button"
-            class="filters__select-label"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-label="Select genre"
-          >
-            <span>Genre</span>
-            <svg
-              class="filters__chevron"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                d="M7 10l5 5 5-5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
-          </button>
-          <ul
-            class="filters__menu"
-            data-genres
-            role="listbox"
-            aria-label="Select genre"
-          >
-            <!-- Заповнюється динамічно з API -->
-          </ul>
-        </div>
-      </aside>
-
-      <!-- Artists list -->
-      <div class="artists-content">
-        <ul class="artists__grid" data-artists-grid></ul>
-
-        <!-- Loader -->
-        <div class="artists__loader" data-artists-loader hidden>
-          <span class="spinner" aria-hidden="true"></span>
-          <span class="sr-only">Loading…</span>
-        </div>
-
-        <!-- Pagination -->
-        <nav class="pagination" data-pagination hidden></nav>
-      </div>
+    <div class="artists__loader" data-artists-loader hidden>
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="sr-only">Loading…</span>
     </div>
+
+    <ul class="artists__grid" data-artists-grid></ul>
+
+    <button class="btn btn--primary artists-more" data-artists-load hidden>
+      <span data-btn-text>Load More</span>
+      <svg class="icon-artists-learn-more" width="14" height="24">
+        <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-learn-more-btn"></use>
+      </svg>
+      <span class="spinner spinner--btn" data-btn-spinner hidden></span>
+    </button>
   </div>
 </section>
-
-<!-- Template for artist card -->
-<template id="artist-item-tpl">
-  <li class="artist-card">
-    <a href="#" class="artist-card__link">
-      <img src="" alt="" class="artist-card__img" loading="lazy" />
-      <div class="artist-card__body">
-        <h3 class="artist-card__name"></h3>
-        <p class="artist-card__genre"></p>
-      </div>
-    </a>
-  </li>
-</template>
 
       <section class="about-us" id="About-us">
   
