@@ -1,32 +1,31 @@
-// artist-filtr.js
-
-// ✅ (1) Масив для артистів (щоб не було ReferenceError)
+// Масив для артистів (щоб не було ReferenceError)
 let items = [];
 
-// ✅ (2) Сет для даних з API
+// Функція для збереження даних з API
 function setItems(payload) {
   items = Array.isArray(payload)
     ? payload
     : payload?.results || payload?.artists || [];
 }
 
-// Базова URL
+// Базова URL для запитів
 const BASE_URL = 'https://sound-wave.b.goit.study/api/artists';
 
-// ✅ (3) Побудова URL без порожніх параметрів
+// ==================== Функції ====================
+
+// Функція для побудови URL з параметрами
 function buildUrl({
   page = 1,
-  perPage = 8, // локальна змінна для стану
-  // search = '', genre = '', sort = '', // більше не відправляємо на сервер
+  perPage = 8,
+  // search, genre, sort — більше не передаємо на сервер
 } = {}) {
   const params = new URLSearchParams();
 
+  // Сервер підтримує тільки page і limit
   params.set('page', Number(page) || 1);
-
-  // ⚡ для API сервер очікує "limit" замість "perPage"
   params.set('limit', Number(perPage) || 8);
 
-  // ❌ сервер не підтримує search, genre, sort
+  // ❌ search, genre, sort не відправляються на сервер
   // if (search && search.trim()) params.set('search', search.trim());
   // if (genre && genre.trim()) params.set('genre', genre.trim());
   // if (sort && sort.trim()) params.set('sort', sort.trim());
@@ -34,10 +33,10 @@ function buildUrl({
   return `${BASE_URL}?${params.toString()}`;
 }
 
-// ✅ (4) Запит до API з обробкою помилок
+// Функція для запиту до API
 async function fetchArtists(opts = {}) {
   const url = buildUrl(opts);
-  console.log('[artists] GET →', url);
+  console.log('[artists] GET →', url); // для дебагу
 
   const res = await fetch(url);
   if (!res.ok) {
@@ -53,18 +52,20 @@ async function fetchArtists(opts = {}) {
 // ==================== UI ====================
 
 // Елементи з HTML
-const searchInput = document.querySelector('#artist-search'); // поле пошуку
-const searchBtn = document.querySelector('.filters__search-btn'); // кнопка пошуку
-const resetBtn = document.querySelector('.filters__reset'); // reset
-const sortMenu = document.querySelector('[data-name="sorting"] .filters__menu'); // список сортування
-const genreMenu = document.querySelector('[data-genres]'); // жанри
-const artistsGrid = document.querySelector('[data-artists-grid]'); // сітка артистів
-const loadMoreBtn = document.querySelector('[data-artists-load]'); // Load more
+const searchInput = document.querySelector('#artist-search');
+const searchBtn = document.querySelector('.filters__search-btn');
+const resetBtn = document.querySelector('.filters__reset');
+const sortMenu = document.querySelector('[data-name="sorting"] .filters__menu');
+const genreMenu = document.querySelector('[data-genres]');
+const artistsGrid = document.querySelector('[data-artists-grid]');
+const loadMoreBtn = document.querySelector('[data-artists-load]');
 
-// Стан фільтрів
+// Стан фільтрів для фронтенду
 let state = { page: 1, perPage: 8, search: '', genre: '', sort: '' };
 
-// ✅ (5) Рендер однієї картки
+// ==================== Рендер ====================
+
+// Рендер однієї картки артиста
 function renderCard(artist) {
   const tpl = document.querySelector('#artist-item-tpl');
   const clone = tpl.content.cloneNode(true);
@@ -78,16 +79,17 @@ function renderCard(artist) {
   return clone;
 }
 
-// ✅ (6) Повний рендер
+// Рендер усіх карток
 function renderCards(list) {
   artistsGrid.innerHTML = '';
   list.forEach(artist => {
     artistsGrid.appendChild(renderCard(artist));
   });
-  loadMoreBtn.hidden = list.length < state.perPage; // показуємо кнопку, якщо є більше
+  // Показати Load more тільки якщо більше артиcтів
+  loadMoreBtn.hidden = list.length < state.perPage;
 }
 
-// ✅ (7) Додавання (Load more)
+// Додати карти без очищення сітки (Load more)
 function appendCards(list) {
   list.forEach(artist => {
     artistsGrid.appendChild(renderCard(artist));
@@ -96,29 +98,29 @@ function appendCards(list) {
 
 // ==================== Event Listeners ====================
 
-// Пошук (кнопка) — залишаємо для локального фільтру на фронтенді
+// Пошук (локальний, не на сервер)
 searchBtn.addEventListener('click', async () => {
   state.page = 1;
-  state.search = searchInput.value.trim(); // локальний стан
+  state.search = searchInput.value.trim(); // використовується лише для фронтенду
 
   try {
     await fetchArtists(state);
-    renderCards(items);
+    renderCards(items); // тут можна додати локальний фільтр по search
     resetBtn.disabled = false;
   } catch (err) {
     console.error(err);
   }
 });
 
-// Сортування (клік по пункту меню) — локально
+// Сортування (локально)
 sortMenu.addEventListener('click', async e => {
   if (e.target.dataset.value !== undefined) {
-    state.sort = e.target.dataset.value; // локальний стан
+    state.sort = e.target.dataset.value; // локально
     state.page = 1;
 
     try {
       await fetchArtists(state);
-      renderCards(items);
+      renderCards(items); // можна сортувати items локально
       resetBtn.disabled = false;
     } catch (err) {
       console.error(err);
@@ -126,15 +128,15 @@ sortMenu.addEventListener('click', async e => {
   }
 });
 
-// Вибір жанру — локально
+// Жанри (локально)
 genreMenu.addEventListener('click', async e => {
   if (e.target.dataset.value !== undefined) {
-    state.genre = e.target.dataset.value; // локальний стан
+    state.genre = e.target.dataset.value; // локально
     state.page = 1;
 
     try {
       await fetchArtists(state);
-      renderCards(items);
+      renderCards(items); // можна фільтрувати items локально
       resetBtn.disabled = false;
     } catch (err) {
       console.error(err);
