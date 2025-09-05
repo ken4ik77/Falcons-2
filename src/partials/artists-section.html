@@ -2,6 +2,20 @@
   <div class="container">
     <h2 class="artists__title">Artists</h2>
     <p class="artists__subtitle">Explore Your New Favorite Artists</p>
+    <div class="artists-layout ar">
+      <!-- Filters -->
+      <aside class="filters" aria-label="Filters">
+        <div class="filters__head">
+          <h2 class="filters__title" id="filters-title">Filters</h2>
+          <button
+            type="button"
+            class="filters__reset"
+            aria-label="Reset all filters"
+            disabled
+          >
+            Reset
+          </button>
+        </div>
 
     <div class="artists-layout">
       <!-- ===== Filters ===== -->
@@ -34,6 +48,7 @@
               <path
                 d="M21 21l-4.2-4.2M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+
               />
             </svg>
           </button>
@@ -55,6 +70,7 @@
           </button>
           <ul class="filters__menu" role="listbox" aria-label="Sorting options">
             <li role="option" tabindex="0" data-value="" aria-selected="true">Default</li>
+
             <li role="option" tabindex="0" data-value="name_asc">A-Z</li>
             <li role="option" tabindex="0" data-value="name_desc">Z-A</li>
           </ul>
@@ -100,11 +116,13 @@
         </button>
 
         <!-- (опц.) Пагінація, поки прихована -->
+ 
         <nav class="pagination" data-pagination hidden></nav>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- Template для картки артиста -->
 <template id="artist-item-tpl">
@@ -112,6 +130,7 @@
     <a href="#" class="artist-card__link">
       <img src="" alt="artist" class="artist-card__img" loading="lazy" />
       <div class="artist-card__info">
+
         <h3 class="artist-card__name"></h3>
         <p class="artist-card__genre"></p>
       </div>

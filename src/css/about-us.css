@@ -1,7 +1,8 @@
-.about-us {
-background-color: var(--color-scheme-1-background);
-padding: 64px 16px;
-margin: 0 auto;
+.about-us{
+  background-color: var(--color-scheme-1-background);
+}
+.ab-us-cont{
+  padding: 64px 16px;
 }
 
 .ab-us-picture {
@@ -39,9 +40,8 @@ color: var(--color-scheme-1-text);
 }
 
 @media (min-width: 768px) {
-  .about-us{
-    padding: 64px 32px;
-  }
+  .ab-us-cont{ padding: 64px 32px;}
+  
   .ab-us-text{
     font-size: 20px;
   }
@@ -54,16 +54,17 @@ color: var(--color-scheme-1-text);
     width: 80px;
   }
 }
-@media (min-width: 1200px) {
-   .about-us {
+@media (min-width: 1312px) {
+   .ab-us-cont {
      padding: 112px 64px;
      display: flex;
     }
+    
     .ab-us-title{
         font-size: 60px;
     }
     .content-ab-wrap{
-        max-width: 50%;
+        width: 50%;
         margin-top: 0;
         margin-left: 32px;
         justify-content: center;

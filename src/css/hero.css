@@ -58,6 +58,9 @@
   width: 100%;
 }
 .link-hero {
+    display: flex;
+      align-items: center;
+      justify-content: center;
   border-radius: 12px;
   padding: 10px 24px;
   width: 280px;
@@ -70,8 +73,11 @@
   background: var(--color-affair);
   text-align: center;
   margin-right: 12px;
+  margin: 0 auto;
 }
 .hero-btn {
+  display: inline-flex;    align-items: center;
+  gap: 17px;
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 18px;
@@ -80,7 +86,7 @@
 }
 .icon-hero {
   fill: var(--color-scheme-1-text);
-  justify-content: center;
+
 }
 .backgr-hero {
   width: 280px;
@@ -99,24 +105,24 @@
 }
 
 @media screen and (min-width: 768px) {
-  .hero-cont {
-    max-width: 1024px;
-    margin-bottom: 32px;
-  }
+  
   .hero-header {
     max-width: 624px;
     margin-bottom: 24px;
     width: 100%;
   }
   .hero-content {
-    margin-bottom: 24px;
+    padding: 64px 0 0;
+    margin-bottom: 32px;
   }
   .hero-text {
     max-width: 624px;
     width: 100%;
+    margin-bottom: 32px;
   }
   .link-hero {
     width: 246px;
+    margin: 0;
   }
   .backgr-hero {
     width: 704px;
@@ -124,7 +130,7 @@
     background-image: url('../img/Hero/hero-tab.png');
   }
 }
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1312px) {
   .hero-cont {
     padding: 0px 64px;
     max-width: 1440px;
@@ -132,10 +138,14 @@
   }
   .hero-header {
     max-width: 640px;
+    font-size: 84px;
   }
   .hero-content {
     width: 640px;
     align-content: center;
+  }
+  .hero-text {
+    font-size: 20px;
   }
   .backgr-hero {
     width: 641px;
