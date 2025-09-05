@@ -113,14 +113,16 @@
 
       <!-- Artists list -->
       <div class="artists-content">
+        <!-- ✅ залишаємо тільки один список -->
         <ul class="artists__grid" data-artists-grid></ul>
+
+        <!-- Loader -->
         <div class="artists__loader" data-artists-loader hidden>
           <span class="spinner" aria-hidden="true"></span>
           <span class="sr-only">Loading…</span>
         </div>
 
-        <ul class="artists__grid" data-artists-grid></ul>
-
+        <!-- Load more -->
         <button class="btn btn--primary artists-more" data-artists-load hidden>
           <span data-btn-text>Load More</span>
           <svg class="icon-artists-learn-more" width="14" height="24">
@@ -128,20 +130,113 @@
           </svg>
           <span class="spinner spinner--btn" data-btn-spinner hidden></span>
         </button>
+
         <!-- Pagination -->
         <nav class="pagination" data-pagination hidden></nav>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Template -->
 <template id="artist-item-tpl">
   <li class="artist-card">
     <a href="#" class="artist-card__link">
-      <img src="" alt="" class="artist-card__img" loading="lazy" />
-      <div class="artist-card__body">
+      <!-- ✅ виправлено: забрав div і замінив на block елемент -->
+      <img src="" alt="artist" class="artist-card__img" loading="lazy" />
+      <div class="artist-card__info">
+        <!-- Замість повторного .artist-card__img -->
         <h3 class="artist-card__name"></h3>
         <p class="artist-card__genre"></p>
       </div>
     </a>
   </li>
 </template>
+<script>
+  // Беремо елементи
+  const grid = document.querySelector('[data-artists-grid]');
+  const loader = document.querySelector('[data-artists-loader]');
+  const loadMoreBtn = document.querySelector('[data-artists-load]');
+  const artistTpl = document.querySelector('#artist-item-tpl');
+
+  // Тимчасові дані (приклад). Ти тут можеш підставити дані з API.
+  const artists = [
+    {
+      name: 'Eminem',
+      genre: 'Rap',
+      image: 'https://via.placeholder.com/300x200?text=Eminem',
+    },
+    {
+      name: 'Adele',
+      genre: 'Pop',
+      image: 'https://via.placeholder.com/300x200?text=Adele',
+    },
+    {
+      name: 'Imagine Dragons',
+      genre: 'Rock',
+      image: 'https://via.placeholder.com/300x200?text=Imagine+Dragons',
+    },
+    {
+      name: 'Beyoncé',
+      genre: 'R&B',
+      image: 'https://via.placeholder.com/300x200?text=Beyonce',
+    },
+  ];
+
+  // Поточна сторінка
+  let page = 1;
+  const perPage = 2;
+
+  // Функція рендеру артистів
+  function renderArtists(list) {
+    list.forEach(artist => {
+      const clone = artistTpl.content.cloneNode(true);
+
+      const link = clone.querySelector('.artist-card__link');
+      const img = clone.querySelector('.artist-card__img');
+      const name = clone.querySelector('.artist-card__name');
+      const genre = clone.querySelector('.artist-card__genre');
+
+      // Заповнюємо дані
+      link.href = '#'; // тут можна зробити посилання на сторінку артиста
+      img.src = artist.image;
+      img.alt = artist.name;
+      name.textContent = artist.name;
+      genre.textContent = artist.genre;
+
+      grid.appendChild(clone);
+    });
+  }
+
+  // Функція завантаження (імітація API)
+  function loadArtists() {
+    loader.hidden = false;
+    setTimeout(() => {
+      loader.hidden = true;
+
+      // Вираховуємо дані для сторінки
+      const start = (page - 1) * perPage;
+      const end = start + perPage;
+      const slice = artists.slice(start, end);
+
+      renderArtists(slice);
+
+      // Якщо ще є дані → показати кнопку
+      if (end < artists.length) {
+        loadMoreBtn.hidden = false;
+      } else {
+        loadMoreBtn.hidden = true;
+      }
+
+      page++;
+    }, 700); // імітація завантаження
+  }
+
+  // Подія на кнопку "Load More"
+  loadMoreBtn.addEventListener('click', loadArtists);
+
+  // При завантаженні сторінки
+  document.addEventListener('DOMContentLoaded', () => {
+    loadArtists();
+  });
+</script>

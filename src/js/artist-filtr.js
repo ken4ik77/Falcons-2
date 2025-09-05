@@ -1,301 +1,169 @@
-const API_BASE = 'https://ken4ik77.github.io/Falcons-2/ '; // приклад: "https://api.example.com"
-const ENDPOINTS = {
-  genres: () => `${API_BASE}/genres`,
-  artists: params =>
-    `${API_BASE}/artists?${new URLSearchParams(params).toString()}`,
-};
+// artist-filtr.js
 
-const STATE = {
-  page: 1,
-  perPage: 8, // підлаштуй під макет
-  totalPages: 1,
-  q: '',
-  genre: '', // за замовчуванням жанр не обрано
-  sort: '', // за замовчуванням без сортування
-};
+// ✅ (1) Масив для артистів (щоб не було ReferenceError)
+let items = [];
 
-document.addEventListener('DOMContentLoaded', init);
-
-function $(sel, root = document) {
-  return root.querySelector(sel);
-}
-function $all(sel, root = document) {
-  return Array.from(root.querySelectorAll(sel));
+// ✅ (2) Сет для даних з API
+function setItems(payload) {
+  items = Array.isArray(payload)
+    ? payload
+    : payload?.results || payload?.artists || [];
 }
 
-function init() {
-  const section = $('#Artists');
-  if (!section) return;
+// Базова URL
+const BASE_URL = 'https://sound-wave.b.goit.study/api/artists';
 
-  const btnReset = section.querySelector('.filters__reset');
-  const inputSearch = section.querySelector('.filters__input');
-  const btnSearch = section.querySelector('.filters__search-btn');
-  const selects = $all('.filters__select', section);
-  const genresMenu = section.querySelector('[data-genres]');
-  const grid = section.querySelector('[data-artists-grid]');
-  const loader = section.querySelector('[data-artists-loader]');
-  const pager = section.querySelector('[data-pagination]');
+// ✅ (3) Побудова URL без порожніх параметрів
+function buildUrl({
+  page = 1,
+  perPage = 8, // локальна змінна для стану
+  search = '',
+  genre = '',
+  sort = '',
+} = {}) {
+  const params = new URLSearchParams();
 
-  // 1) Заповнити жанри з API
-  loadGenres();
+  params.set('page', Number(page) || 1);
 
-  // 2) Ініціалізація селектів
-  selects.forEach(initSelect);
+  // ⚡ для API сервер очікує "limit" замість "perPage"
+  params.set('limit', Number(perPage) || 8);
 
-  // Закривати всі селекти при кліку поза ними
-  document.addEventListener('click', e => {
-    selects.forEach(sel => {
-      if (!sel.contains(e.target)) closeSelect(sel);
-    });
+  if (search && search.trim()) params.set('search', search.trim());
+  if (genre && genre.trim()) params.set('genre', genre.trim());
+  if (sort && sort.trim()) params.set('sort', sort.trim());
+
+  return `${BASE_URL}?${params.toString()}`;
+}
+
+// ✅ (4) Запит до API з обробкою помилок
+async function fetchArtists(opts = {}) {
+  const url = buildUrl(opts);
+  console.log('[artists] GET →', url);
+
+  const res = await fetch(url);
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new Error(`Bad Request ${res.status}: ${text}`);
+  }
+
+  const data = await res.json();
+  setItems(data);
+  return items;
+}
+
+// ==================== UI ====================
+
+// Елементи з HTML
+const searchInput = document.querySelector('#artist-search'); // поле пошуку
+const searchBtn = document.querySelector('.filters__search-btn'); // кнопка пошуку
+const resetBtn = document.querySelector('.filters__reset'); // reset
+const sortMenu = document.querySelector('[data-name="sorting"] .filters__menu'); // список сортування
+const genreMenu = document.querySelector('[data-genres]'); // жанри
+const artistsGrid = document.querySelector('[data-artists-grid]'); // сітка артистів
+const loadMoreBtn = document.querySelector('[data-artists-load]'); // Load more
+
+// Стан фільтрів
+let state = { page: 1, perPage: 8, search: '', genre: '', sort: '' };
+
+// ✅ (5) Рендер однієї картки
+function renderCard(artist) {
+  const tpl = document.querySelector('#artist-item-tpl');
+  const clone = tpl.content.cloneNode(true);
+
+  clone.querySelector('.artist-card__img').src =
+    artist.image || '/img/no-image.png';
+  clone.querySelector('.artist-card__name').textContent = artist.name;
+  clone.querySelector('.artist-card__genre').textContent =
+    artist.genre || 'Unknown';
+
+  return clone;
+}
+
+// ✅ (6) Повний рендер
+function renderCards(list) {
+  artistsGrid.innerHTML = '';
+  list.forEach(artist => {
+    artistsGrid.appendChild(renderCard(artist));
   });
+  loadMoreBtn.hidden = list.length < state.perPage; // показуємо кнопку, якщо є більше
+}
 
-  // Пошук: Enter або клік по кнопці
-  inputSearch.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      runSearch();
-    }
+// ✅ (7) Додавання (Load more)
+function appendCards(list) {
+  list.forEach(artist => {
+    artistsGrid.appendChild(renderCard(artist));
   });
-  btnSearch.addEventListener('click', runSearch);
+}
 
-  function runSearch() {
-    STATE.q = inputSearch.value.trim();
-    STATE.page = 1;
-    fetchAndRender();
-    updateResetState();
+// ==================== Event Listeners ====================
+
+// Пошук (кнопка)
+searchBtn.addEventListener('click', async () => {
+  state.page = 1;
+  state.search = searchInput.value.trim();
+
+  try {
+    await fetchArtists(state);
+    renderCards(items);
+    resetBtn.disabled = false;
+  } catch (err) {
+    console.error(err);
   }
+});
 
-  // Reset
-  btnReset.addEventListener('click', () => {
-    if (btnReset.disabled) return;
-    // поле пошуку
-    inputSearch.value = '';
-    STATE.q = '';
-    // селекти — скинути вибір і повернути плейсхолдер
-    selects.forEach(sel => resetSelect(sel));
-    // стейт
-    STATE.genre = '';
-    STATE.sort = '';
-    STATE.page = 1;
-    fetchAndRender();
-    updateResetState();
-  });
+// Сортування (клік по пункту меню)
+sortMenu.addEventListener('click', async e => {
+  if (e.target.dataset.value !== undefined) {
+    state.sort = e.target.dataset.value;
+    state.page = 1;
 
-  // Початкове завантаження першої сторінки без фільтрів
-  fetchAndRender();
-  updateResetState();
-
-  // ===== helpers for selects =====
-  function initSelect(sel) {
-    const btn = sel.querySelector('.filters__select-label');
-    const menu = sel.querySelector('.filters__menu');
-    const getOpts = () => Array.from(menu.querySelectorAll("[role='option']"));
-
-    btn.addEventListener('click', () => {
-      const open = !sel.classList.contains('is-open');
-      closeAll();
-      if (open) openSelect(sel);
-      else closeSelect(sel);
-    });
-
-    menu.addEventListener('keydown', e => {
-      const opts = getOpts();
-      const i = opts.indexOf(document.activeElement);
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        (opts[i + 1] || opts[0])?.focus();
-      }
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        (opts[i - 1] || opts.at(-1))?.focus();
-      }
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        const li = document.activeElement;
-        if (li?.getAttribute('role') === 'option') onChoose(li);
-      }
-      if (e.key === 'Escape') {
-        closeSelect(sel);
-        btn.focus();
-      }
-    });
-  }
-
-  function resetSelect(sel) {
-    sel
-      .querySelectorAll("[role='option']")
-      .forEach(li => li.setAttribute('aria-selected', 'false'));
-    const labelSpan = sel.querySelector('.filters__select-label span');
-    labelSpan.textContent =
-      sel.dataset.name === 'sorting' ? 'Sorting' : 'Genre';
-    closeSelect(sel);
-  }
-  function openSelect(sel) {
-    sel.classList.add('is-open');
-    sel
-      .querySelector('.filters__select-label')
-      ?.setAttribute('aria-expanded', 'true');
-  }
-  function closeSelect(sel) {
-    sel.classList.remove('is-open');
-    sel
-      .querySelector('.filters__select-label')
-      ?.setAttribute('aria-expanded', 'false');
-  }
-  function closeAll() {
-    $all('.filters__select.is-open', section).forEach(closeSelect);
-  }
-
-  function currentValues() {
-    const sortingSel = selects.find(s => s.dataset.name === 'sorting');
-    const genreSel = selects.find(s => s.dataset.name === 'genre');
-    const getSelectedText = sel =>
-      sel.querySelector("[aria-selected='true']")?.textContent.trim() || '';
-    return {
-      search: inputSearch.value.trim(),
-      sorting: getSelectedText(sortingSel),
-      genre: getSelectedText(genreSel),
-    };
-  }
-
-  function updateResetState() {
-    const v = currentValues();
-    const dirty = v.search !== '' || v.sorting !== '' || v.genre !== '';
-    btnReset.disabled = !dirty;
-  }
-
-  // ===== Data layer =====
-  async function loadGenres() {
     try {
-      const res = await fetch(ENDPOINTS.genres());
-      const data = await res.json();
-      // Очікуємо масив жанрів: [{id, name}] або масив рядків
-      const items = Array.isArray(data) ? data : data?.items || [];
-      const genres = items.map(g =>
-        typeof g === 'string' ? { id: g, name: g } : g
-      );
-      // Створюємо список: перший пункт — "(не обрано)"
-      const frag = document.createDocumentFragment();
-      const first = document.createElement('li');
-      first.role = 'option';
-      first.tabIndex = 0;
-      first.dataset.value = '';
-      first.setAttribute('aria-selected', 'false');
-      first.textContent = '(не обрано)';
-      frag.appendChild(first);
-      for (const g of genres) {
-        const li = document.createElement('li');
-        li.role = 'option';
-        li.tabIndex = 0;
-        li.dataset.value = g.id ?? g.name;
-        li.setAttribute('aria-selected', 'false');
-        li.textContent = g.name ?? String(g);
-        frag.appendChild(li);
-      }
-      genresMenu.innerHTML = '';
-      genresMenu.appendChild(frag);
+      await fetchArtists(state);
+      renderCards(items);
+      resetBtn.disabled = false;
     } catch (err) {
-      console.error('Failed to load genres', err);
-      // Фолбек: мінімальний список, щоб UI був працездатним
-      genresMenu.innerHTML = `
-<li role="option" tabindex="0" data-value="" aria-selected="false">(не обрано)</li>
-<li role="option" tabindex="0" data-value="rock" aria-selected="false">Rock</li>
-<li role="option" tabindex="0" data-value="pop" aria-selected="false">Pop</li>
-<li role="option" tabindex="0" data-value="jazz" aria-selected="false">Jazz</li>`;
+      console.error(err);
     }
   }
-  async function fetchAndRender() {
-    empty.className = 'empty';
-    empty.textContent = 'За вашим запитом нічого не знайдено.';
-    grid.appendChild(empty);
-    pager.hidden = true; // Не показувати пагінатор при пустому результаті
-    return;
-  }
-  const tpl = document.getElementById('artist-item-tpl');
-  const frag = document.createDocumentFragment();
-  for (const it of items) {
-    const li = tpl.content.firstElementChild.cloneNode(true);
-    const img = li.querySelector('.artist-card__img');
-    const name = li.querySelector('.artist-card__name');
-    const genre = li.querySelector('.artist-card__genre');
-    img.src = it.photo || it.image || 'https://picsum.photos/600/400';
-    img.alt = `Portrait of ${it.name || 'artist'}`;
-    name.textContent = it.name || 'Unknown Artist';
-    const genres = it.genres || it.genre || [];
-    genre.textContent = Array.isArray(genres)
-      ? genres.join(', ')
-      : String(genres || '');
-    frag.appendChild(li);
-  }
-  grid.appendChild(frag);
-}
+});
 
-function renderPagination() {
-  // Якщо лише одна сторінка і є результати — можна ховати
-  if (STATE.totalPages <= 1) {
-    pager.hidden = true;
-    pager.innerHTML = '';
-    return;
-  }
-  pager.hidden = false;
-  pager.innerHTML = '';
-  const mkBtn = (label, page, opts = {}) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = label;
-    if (opts.title) b.title = opts.title;
-    if (opts.current) b.classList.add('is-current');
-    if (opts.disabled) b.disabled = true;
-    b.addEventListener('click', () => {
-      if (b.disabled) return;
-      STATE.page = page;
-      fetchAndRender();
-      window.scrollTo({
-        top: document.querySelector('#Artists').offsetTop,
-        behavior: 'smooth',
-      });
-    });
-    return b;
-  };
+// Вибір жанру
+genreMenu.addEventListener('click', async e => {
+  if (e.target.dataset.value !== undefined) {
+    state.genre = e.target.dataset.value;
+    state.page = 1;
 
-  const prev = mkBtn('‹', Math.max(1, STATE.page - 1), {
-    title: 'Previous',
-    disabled: STATE.page === 1,
-  });
-  pager.appendChild(prev);
-
-  // Проста стратегія відображення сторінок: до 7 кнопок
-  const total = STATE.totalPages;
-  const pages = calcPageRange(STATE.page, total, 7);
-  pages.forEach(p => {
-    if (p === '…') {
-      const span = document.createElement('span');
-      span.textContent = '…';
-      span.style.minWidth = '16px';
-      span.style.textAlign = 'center';
-      pager.appendChild(span);
-    } else {
-      pager.appendChild(mkBtn(String(p), p, { current: p === STATE.page }));
+    try {
+      await fetchArtists(state);
+      renderCards(items);
+      resetBtn.disabled = false;
+    } catch (err) {
+      console.error(err);
     }
-  });
+  }
+});
 
-  const next = mkBtn('›', Math.min(total, STATE.page + 1), {
-    title: 'Next',
-    disabled: STATE.page === total,
-  });
-  pager.appendChild(next);
-}
+// Load more
+loadMoreBtn.addEventListener('click', async () => {
+  state.page += 1;
+  try {
+    await fetchArtists(state);
+    appendCards(items);
+  } catch (err) {
+    console.error(err);
+  }
+});
 
-function calcPageRange(current, total, max = 7) {
-  if (total <= max) return Array.from({ length: total }, (_, i) => i + 1);
-  const range = [1];
-  const windowSize = max - 2; // лишаємо місце для 1 та останньої
-  let start = Math.max(2, current - Math.floor(windowSize / 2));
-  let end = Math.min(total - 1, start + windowSize - 1);
-  if (end - start + 1 < windowSize) start = Math.max(2, end - windowSize + 1);
-  if (start > 2) range.push('…');
-  for (let p = start; p <= end; p++) range.push(p);
-  if (end < total - 1) range.push('…');
-  range.push(total);
-  return range;
-}
+// Reset
+resetBtn.addEventListener('click', async () => {
+  state = { page: 1, perPage: 8, search: '', genre: '', sort: '' };
+  searchInput.value = '';
+
+  try {
+    await fetchArtists(state);
+    renderCards(items);
+    resetBtn.disabled = true;
+  } catch (err) {
+    console.error(err);
+  }
+});
