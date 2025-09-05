@@ -14,6 +14,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 import { getReviewsByQuery, handleReviews } from './js/feedback.js';
 import { getArtists, renderArtists } from './js/artists-section.js';
 import { listenArtistsSection } from './js/artist-modal.js';
+import { initDropdown, fetchGenres, updateResetBtnState, initArtistFilterListeners } from './js/artist-filtr.js';
 
 import './css/artists-section.css';
 
@@ -38,6 +39,18 @@ async function fetchData() {
     await renderArtists(artists, currentPage, limit);
     listenArtistsSection();
     await handleReviews(reviews.data);
+
+    // 
+    initArtistFilterListeners();
+
+    const sortingSelect = document.querySelector('[data-name="sorting"]');
+    const genreSelect = document.querySelector('[data-name="genre"]');
+    
+    initDropdown(sortingSelect);
+    initDropdown(genreSelect);
+
+    await fetchGenres();
+    updateResetBtnState();
   } catch (error) {
     const message = `Error while executing the request: ${error}`;
     console.error(message);

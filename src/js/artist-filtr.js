@@ -132,7 +132,6 @@ export function initDropdown(selectRoot) {
   });
 }
 
-
 // async function fetchArtists(opts = {}) {
 //   const url = buildUrl(opts);
 //   const res = await fetch(url);
@@ -145,7 +144,7 @@ export function initDropdown(selectRoot) {
 //   return items;
 // }
 
-async function fetchGenres() {
+export async function fetchGenres() {
   try {
     const orderedGenres = [
       'All Genres',
@@ -173,71 +172,73 @@ async function fetchGenres() {
   }
 }
 
-function updateResetBtnState() {
+export function updateResetBtnState() {
   resetBtn.disabled = !(state.search || state.genre || state.sort);
 }
 
-searchBtn.addEventListener('click', () => {
-  state.page = 1;
-  state.search = searchInput.value.trim();
-  renderGrid(applyFilters(allItems));
-  updateResetBtnState();
-});
+export function initArtistFilterListeners() {
+  const searchInput = document.querySelector('#artist-search');
+  const searchBtn = document.querySelector('.filters__search-btn'); //
+  const resetBtn = document.querySelector('.filters__reset');
 
-sortMenu?.addEventListener('click', e => {
-  const value = e.target?.dataset?.value;
-  if (value === undefined) return;
-  state.sort = value;
-  state.page = 1;
+  const sortingSelect = document.querySelector('[data-name="sorting"]');
+  const sortBtn = sortingSelect?.querySelector('.filters__select-label'); //
+  const sortMenu = sortingSelect?.querySelector('.filters__menu'); //
 
-  setSelectLabel(sortingSelect, e.target.textContent.trim());
-  renderGrid(applyFilters(allItems));
-  updateResetBtnState();
+  const genreSelect = document.querySelector('[data-name="genre"]');
+  const genreBtn = genreSelect?.querySelector('.filters__select-label'); //
+  const genreMenu = document.querySelector('[data-genres]'); //
 
-  sortBtn.setAttribute('aria-expanded', 'false');
-  sortMenu.classList.remove('open');
-});
+  searchBtn.addEventListener('click', () => {
+    state.page = 1;
+    state.search = searchInput.value.trim();
+    renderGrid(applyFilters(allItems));
+    updateResetBtnState();
+  });
 
-genreMenu?.addEventListener('click', e => {
-  const value = e.target?.dataset?.value;
-  if (value === undefined) return;
-  state.genre = value;
-  state.page = 1;
+  sortMenu?.addEventListener('click', e => {
+    const value = e.target?.dataset?.value;
+    if (value === undefined) return;
+      state.sort = value;
+      state.page = 1;
 
-  setSelectLabel(genreSelect, e.target.textContent.trim());
-  renderGrid(applyFilters(allItems));
-  updateResetBtnState();
+    setSelectLabel(sortingSelect, e.target.textContent.trim());
+    renderGrid(applyFilters(allItems));
+    updateResetBtnState();
 
-  genreBtn.setAttribute('aria-expanded', 'false');
-  genreMenu.classList.remove('open');
-});
+    sortBtn.setAttribute('aria-expanded', 'false');
+    sortMenu.classList.remove('open');  
+  });
 
-// loadMoreBtn.addEventListener('click', async () => {
-//   try {
-//     state.page += 1;
-//     const next = await fetchArtists(state);
-//     allItems.push(...next);
-//     renderGrid(applyFilters(allItems));
-//   } catch (e) {
-//     console.error(e);
-//   }
-// });
+  genreMenu?.addEventListener('click', e => {
+    const value = e.target?.dataset?.value;
+    if (value === undefined) return;
+    state.genre = value;
+    state.page = 1;
 
-resetBtn.addEventListener('click', () => {
-  state = { page: 1, perPage: 8, search: '', genre: '', sort: '' };
-  searchInput.value = '';
-  setSelectLabel(sortingSelect, 'Sorting');
-  setSelectLabel(genreSelect, 'Genre');
+    setSelectLabel(genreSelect, e.target.textContent.trim());
+    renderGrid(applyFilters(allItems));
+    updateResetBtnState();
 
-  sortBtn?.setAttribute('aria-expanded', 'false');
-  sortMenu?.classList.remove('open');
-  genreBtn?.setAttribute('aria-expanded', 'false');
-  genreMenu?.classList.remove('open');
+    genreBtn.setAttribute('aria-expanded', 'false');
+    genreMenu.classList.remove('open');
+  });
 
-  renderGrid(applyFilters(allItems));
-  updateResetBtnState();
-});
+  resetBtn.addEventListener('click', () => {
+    state = { page: 1, perPage: 8, search: '', genre: '', sort: '' };
+    searchInput.value = '';
+    setSelectLabel(sortingSelect, 'Sorting');
+    setSelectLabel(genreSelect, 'Genre');
 
+    sortBtn?.setAttribute('aria-expanded', 'false');
+    sortMenu?.classList.remove('open');
+    genreBtn?.setAttribute('aria-expanded', 'false');
+    genreMenu?.classList.remove('open');
+
+    renderGrid(applyFilters(allItems));
+    updateResetBtnState();
+  });
+}
 
 // document.addEventListener('DOMContentLoaded', async () => {
 //   try {
