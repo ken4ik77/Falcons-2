@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/Falcons-2/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanilla App Template</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Epilogue:wght@700&family=Roboto:wght@700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script type="module" crossorigin src="/Falcons-2/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/Falcons-2/assets/vendor-DeWL0fjv.js">
+    <link rel="stylesheet" crossorigin href="/Falcons-2/assets/vendor-CT7lxyS-.css">
+    <link rel="stylesheet" crossorigin href="/Falcons-2/assets/index-B6ASZsvF.css">
+  </head>
+  <body>
+    <header>
+  <div class="container header-container">
+    <nav class="header-nav">
+      <a href="./">
+        <svg width="106" height="30" class="header-logo">
+          <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-company-logo"></use>
+        </svg>
+      </a>
+      <ul class="nav-list">
+        <li><a class="header-link" href="#Artists">Artists</a></li>
+        <li><a class="header-link" href="#About-us">About Us</a></li>
+        <li><a class="header-link" href="#Reviews">Reviews</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="burger-bth" data-menu-open>
+      <svg width="24" height="24">
+        <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-menu"></use>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-menu" data-menu>
+    <div class="mobile-menu-container">
+      <a href="/index.html" class="mobile-menu-logo">
+        <svg width="106" height="30">
+          <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-company-logo"></use>
+        </svg>
+      </a>
+
+      <button type="button" class="mobile-menu-close" data-menu-close>
+        <svg width="24" height="24">
+          <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-close"></use>
+        </svg>
+      </button>
+
+      <nav class="mobile-menu-nav">
+        <ul>
+          <li><a href="#Artists" class="mobile-nav-style">Artists</a></li>
+          <li><a href="#About-us" class="mobile-nav-style">About Us</a></li>
+          <li><a href="#Reviews" class="mobile-nav-style">Reviews</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+    <main>
+      <!-- Loads the specified .html file -->
+      <section class="hero" id="hero">
+  <div class="container hero-cont">
+    <div class="hero-content content-hero">
+      <h1 class="hero-header">Discover Your Next Favorite Artist Today</h1>
+      <div class="hero-text-cont">
+        <p class="hero-text">
+          Dive into a world of music discoveries with ArtistsHub – your personal
+          guide to the boundless universe of sound. Explore, filter, and learn
+          about your favorite artists all in one place.
+        </p>
+        <div class="link-hero">
+          <a href="#Artists" class="hero-btn"
+            >Explore Artists
+            <svg class="icon-hero" width="15" height="21">
+              <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-play-btn"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="backgr-hero"></div>
+  </div>
+</section>
+
+      <!-- <section class="artists" id="Artists">
+  <div class="container">
+    <h2 class="artists__title">Artists</h2>
+    <p class="artists__subtitle">Explore Your New Favorite Artists</p>
+    <div class="artists-layout ar">
+      <div class="artists-content">
+        <ul class="artists__grid" data-artists-grid></ul>
+
+        <div class="artists__loader" data-artists-loader hidden>
+          <span class="spinner" aria-hidden="true"></span>
+          <span class="sr-only">Loading…</span>
+        </div>
+
+        <button class="btn btn--primary artists-more" data-artists-load hidden>
+          <span data-btn-text>Load More</span>
+          <svg class="icon-artists-learn-more" width="14" height="24">
+            <use href="/img/icons.svg#icon-learn-more-btn"></use>
+          </svg>
+          <span class="spinner spinner--btn" data-btn-spinner hidden></span>
+        </button>
+
+        <nav class="pagination" data-pagination hidden></nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<template id="artist-item-tpl">
+  <li class="artist-card">
+    <a href="#" class="artist-card__link">
+      <img src="" alt="artist" class="artist-card__img" loading="lazy" />
+      <div class="artist-card__info">
+        <h3 class="artist-card__name"></h3>
+        <p class="artist-card__genre"></p>
+      </div>
+    </a>
+  </li>
+</template>
+<script>
+  const grid = document.querySelector('[data-artists-grid]');
+  const loader = document.querySelector('[data-artists-loader]');
+  const loadMoreBtn = document.querySelector('[data-artists-load]');
+  const artistTpl = document.querySelector('#artist-item-tpl');
+
+  const artists = [
+    {
+      name: 'Eminem',
+      genre: 'Rap',
+      image: 'https://via.placeholder.com/300x200?text=Eminem',
+    },
+    {
+      name: 'Adele',
+      genre: 'Pop',
+      image: 'https://via.placeholder.com/300x200?text=Adele',
+    },
+    {
+      name: 'Imagine Dragons',
+      genre: 'Rock',
+      image: 'https://via.placeholder.com/300x200?text=Imagine+Dragons',
+    },
+    {
+      name: 'Beyoncé',
+      genre: 'R&B',
+      image: 'https://via.placeholder.com/300x200?text=Beyonce',
+    },
+  ];
+
+  let page = 1;
+  const perPage = 2;
+
+  function renderArtists(list) {
+    list.forEach(artist => {
+      const clone = artistTpl.content.cloneNode(true);
+
+      const link = clone.querySelector('.artist-card__link');
+      const img = clone.querySelector('.artist-card__img');
+      const name = clone.querySelector('.artist-card__name');
+      const genre = clone.querySelector('.artist-card__genre');
+
+      link.href = '#';
+      img.src = artist.image;
+      img.alt = artist.name;
+      name.textContent = artist.name;
+      genre.textContent = artist.genre;
+
+      grid.appendChild(clone);
+    });
+  }
+
+  function loadArtists() {
+    loader.hidden = false;
+    setTimeout(() => {
+      loader.hidden = true;
+
+      const start = (page - 1) * perPage;
+      const end = start + perPage;
+      const slice = artists.slice(start, end);
+
+      renderArtists(slice);
+
+      if (end < artists.length) {
+        loadMoreBtn.hidden = false;
+      } else {
+        loadMoreBtn.hidden = true;
+      }
+
+      page++;
+    }, 700);
+  }
+
+  loadMoreBtn.addEventListener('click', loadArtists);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadArtists();
+  });
+</script> -->
+
+<section class="artists" id="Artists">
+  <div class="container">
+    <h2 class="artists__title">Artists</h2>
+    <p class="artists__subtitle">Explore Your New Favorite Artists</p>
+
+    <div class="artists__loader" data-artists-loader hidden>
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="sr-only">Loading…</span>
+    </div>
+
+    <ul class="artists__grid" data-artists-grid></ul>
+
+    <button class="btn btn--primary artists-more" data-artists-load hidden>
+      <span data-btn-text>Load More</span>
+      <svg class="icon-artists-learn-more" width="14" height="24">
+        <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-learn-more-btn"></use>
+      </svg>
+      <span class="spinner spinner--btn" data-btn-spinner hidden></span>
+    </button>
+  </div>
+</section>
+
+      <section class="about-us" id="About-us">
+  
+  <div class="container ab-us-cont"> 
+      <picture>
+    <!-- WebP format-->
+    <source
+      srcset="/Falcons-2/assets/about-us-desk-D51WZf1P.webp 1x, /Falcons-2/assets/about-us-desk-2x-Dng263SK.webp 2x"
+      media="(min-width: 1200px)"
+      type="image/webp"
+    />
+    <source
+      srcset="/Falcons-2/assets/about-us-tab-CrsYF-JT.webp 1x, /Falcons-2/assets/about-us-tab-2x-CAvRZLab.webp 2x"
+      media="(min-width: 768px)"
+      type="image/webp"
+    />
+    <source
+      srcset="/Falcons-2/assets/about-us-mob-gsRfLB2j.webp 1x, /Falcons-2/assets/about-us-mob-2x-vPISRO1B.webp 2x"
+      media="(max-width: 767px)"
+      type="image/webp"
+    />
+  
+    <!-- PNG format-->
+    <source
+      srcset="/Falcons-2/assets/about-us-desk-Dr8kV4oK.png 1x, /Falcons-2/assets/about-us-desk-2x-Cwiko7Fx.png 2x"
+      media="(min-width: 1200px)"
+      type="image/png"
+    />
+    <source
+      srcset="/Falcons-2/assets/about-us-tab-DNMdmnPu.png 1x, /Falcons-2/assets/about-us-tab-2x-DIJsWzk_.png 2x"
+      media="(min-width: 768px)"
+      type="image/png"
+    />
+    <source
+      srcset="/Falcons-2/assets/about-us-mob-uujPIuML.png 1x, /Falcons-2/assets/about-us-mob-2x-B_51tQ3z.png 2x"
+      media="(max-width: 767px)"
+      type="image/png"
+    />
+  
+    <img
+      class="ab-us-picture"
+      src="/Falcons-2/assets/about-us-mob-uujPIuML.png"
+      alt="Team"
+      loading="lazy"
+    />
+  </picture>
+  
+  
+      <div class="content-ab-wrap">
+          <svg class="logo-ab-us">
+                        <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-logo"></use>
+          </svg>
+  
+          <h2 class="ab-us-title">About ArtistsHub</h2>
+          <p class="ab-us-text">
+              At ArtistsHub, our mission is to connect music lovers with the artists they adore.
+              We strive to create a vibrant community where discovering new music is as enjoyable as listening to it.
+          </p>
+      </div>
+  </div>
+</section>
+
+
+      <section class="feedback-section" id="Reviews">
+  <div class="container">
+    <div class="arrow-btns-contaimer">
+      <button
+        class="swiper-button-prev arrow hidden-on-mobile"
+        aria-label="Previous testimonial"
+        type="button"
+      >
+        <svg class="icon-arrow" width="14" height="14">
+          <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-left-arrow"></use>
+        </svg>
+      </button>
+
+      <button
+        class="swiper-button-next arrow hidden-on-mobile"
+        aria-label="Next testimonial"
+        type="button"
+      >
+        <svg class="icon-arrow" width="14" height="14">
+          <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-right-arrow"></use>
+        </svg>
+      </button>
+    </div>
+    <h2 class="visually-hidden">Feedbacks our visitors</h2>
+    <div class="feedback-loader" data-feedbacks-loader hidden>
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="sr-only">Loading…</span>
+    </div>
+    <div class="swiper feedback-swiper">
+      <div class="swiper-wrapper" id="feedback-list"></div>
+      <div class="review-container"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <button
+      type="button"
+      class="btn btn--primary leave-feedback"
+      data-modal-feedback-open
+    >
+      <span data-btn-text>Leave feedback</span>
+    </button>
+  </div>
+</section>
+
+      <div class="backdrop is-hidden" data-modal-feedback>
+  <div class="modal">
+    <button type="button" class="modal-close" data-modal-feedback-close>
+      <svg class="icon" width="32" height="32">
+        <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-x-feedback"></use>
+      </svg>
+    </button>
+    <h2 class="modal-title">Submit feedback</h2>
+    <form class="feedback-form">
+      <label>
+        Name <input type="text" name="name" placeholder="Emily" required />
+      </label>
+      <label>
+        Message
+        <textarea
+          name="message"
+          placeholder="Type your message..."
+          required
+        ></textarea>
+      </label>
+      <div class="rating-feedback-modal">
+        <svg class="star" width="31" height="29">
+          <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-vec-feedback"></use>
+        </svg>
+        <svg class="star" width="31" height="29">
+          <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-vec-feedback"></use>
+        </svg>
+        <svg class="star" width="31" height="29">
+          <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-vec-feedback"></use>
+        </svg>
+        <svg class="star" width="31" height="29">
+          <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-vec-feedback"></use>
+        </svg>
+        <svg class="star" width="31" height="29">
+          <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-vec-feedback"></use>
+        </svg>
+      </div>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+</div>
+
+      <div class="artist-modal hidden-artist-modal">
+  <div class="artist-loader" data-artist-loader hidden>
+    <span class="spinner" aria-hidden="true"></span>
+    <span class="sr-only">Loading…</span>
+  </div>
+
+  <div class="modal-content">
+    <button class="close-artist-modal">
+      <svg width="14px" height="14px" class="close-modal">
+        <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="artist-info"></div>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="footer">
+  <div class=" container footer__container">
+    <div class="footer__top">
+      <!-- ЛОГОТИП -->
+      <a href="./" class="footer__logo">
+        <!-- Лого для мобилки -->
+        <svg class="logo-footer logo-footer--mobile" width="30" height="30">
+          <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-logo"></use>
+        </svg>
+
+        <!-- Лого для планшета/ПК -->
+        <svg class="logo-footer logo-footer--desktop" width="106" height="30">
+          <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-company-logo"></use>
+        </svg>
+
+        <span class="span_logo">Artists</span>
+      </a>
+
+      <!-- НАВІГАЦІЯ -->
+      <nav class="footer__nav">
+        <ul class="art-list">
+          <li><a href="#Artists" class="footer__link">Artists</a></li>
+          <li><a href="#About-us" class="footer__link">About us</a></li>
+          <li><a href="#Reviews" class="footer__link">Reviews</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- НИЖНІЙ РЯД -->
+    <div class="footer__bottom">
+      <div class="footer__socials">
+        <a
+          href="https://www.instagram.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg class="social-icn" width="40px" height="40px">
+            <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-Instagram"></use>
+          </svg>
+        </a>
+        <a
+          href="https://www.facebook.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg class="social-icn" width="40px" height="40px">
+            <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-Facebook"></use>
+          </svg>
+        </a>
+        <a
+          href="https://www.youtube.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg class="social-icn" width="40px" height="40px">
+            <use href="/Falcons-2/assets/icons-CtQiyP8Q.svg#icon-Youtube"></use>
+          </svg>
+        </a>
+      </div>
+      <p class="footer__copy">© 2025 ArtistsHub. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
